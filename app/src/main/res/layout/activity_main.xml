@@ -6,13 +6,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- Add Toolbar -->
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <!-- 1 | Add TabLayout to handle tabs -->
     <android.support.design.widget.TabLayout
         android:id="@+id/activity_main_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        app:tabIndicatorColor="@color/TabIndicator"
+        app:tabIndicatorColor="@color/colorAccent"
         app:tabTextColor="#9CE3EC"
         app:tabSelectedTextColor="#FFFFFF"/>
 

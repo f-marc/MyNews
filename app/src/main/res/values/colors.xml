@@ -3,9 +3,6 @@
 
     <color name="colorPrimary">#16AEC9</color>
     <color name="colorPrimaryDark">#118595</color>
-    <color name="colorAccent">#16AEC9</color>
-
-    <!-- TabIndicatorColor -->
-    <color name="TabIndicator">#F6E518</color>
+    <color name="colorAccent">#F6E518</color>
 
 </resources>
