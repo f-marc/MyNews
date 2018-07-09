@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/activity_main_drawer_news"
+            android:icon="@drawable/baseline_palette_black_24"
+            android:title="@string/category_one" />
+
+        <item
+            android:id="@+id/activity_main_drawer_profile"
+            android:icon="@drawable/baseline_pool_black_24"
+            android:title="@string/category_two" />
+        <item
+            android:id="@+id/activity_main_drawer_settings"
+            android:icon="@drawable/baseline_flight_black_24"
+            android:title="@string/category_three" />
+    </group>
+
+</menu>

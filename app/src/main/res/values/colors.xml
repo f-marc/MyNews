@@ -5,4 +5,6 @@
     <color name="colorPrimaryDark">#118595</color>
     <color name="colorAccent">#F6E518</color>
 
+    <color name="hamburgerColor">#FFFFFF</color>
+
 </resources>

@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">MyNews</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Used in Toolbar -->
+    <string name="search">Search</string>
+    <string name="param">Parameters</string>
+
+    <!-- Used in MenuDrawer -->
+    <string name="category_one">Art</string>
+    <string name="category_two">Sport</string>
+    <string name="category_three">Travel</string>
+
+    <!-- Used in NavigationDrawer -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

@@ -27,9 +27,9 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 0:
                 return StoriesPageFragment.newInstance();
             case 1:
-                return BusinessPageFragment.newInstance();
-            case 2:
                 return PopularPageFragment.newInstance();
+            case 2:
+                return BusinessPageFragment.newInstance();
             default:
                 return null;
         }
