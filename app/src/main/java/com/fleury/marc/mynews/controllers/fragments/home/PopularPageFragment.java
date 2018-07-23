@@ -1,4 +1,4 @@
-package com.fleury.marc.mynews.controllers.fragments;
+package com.fleury.marc.mynews.controllers.fragments.home;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.fleury.marc.mynews.controllers.fragments.StoriesPageFragment;
-import com.fleury.marc.mynews.controllers.fragments.PopularPageFragment;
-import com.fleury.marc.mynews.controllers.fragments.BusinessPageFragment;
+import com.fleury.marc.mynews.controllers.fragments.home.StoriesPageFragment;
+import com.fleury.marc.mynews.controllers.fragments.home.PopularPageFragment;
+import com.fleury.marc.mynews.controllers.fragments.home.WorldPageFragment;
 
 public class PageAdapter extends FragmentPagerAdapter {
 
@@ -29,7 +29,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 1:
                 return PopularPageFragment.newInstance();
             case 2:
-                return BusinessPageFragment.newInstance();
+                return WorldPageFragment.newInstance();
             default:
                 return null;
         }
@@ -43,7 +43,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 1:
                 return "MOST POPULAR";
             case 2:
-                return "BUSINESS";
+                return "WORLD";
             default:
                 return null;
         }

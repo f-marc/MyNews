@@ -5,18 +5,37 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/activity_main_drawer_news"
+            android:id="@+id/activity_main_drawer_art"
             android:icon="@drawable/baseline_palette_black_24"
             android:title="@string/category_one" />
-
         <item
-            android:id="@+id/activity_main_drawer_profile"
-            android:icon="@drawable/baseline_pool_black_24"
+            android:id="@+id/activity_main_drawer_books"
+            android:icon="@drawable/baseline_book_black_24"
             android:title="@string/category_two" />
         <item
-            android:id="@+id/activity_main_drawer_settings"
-            android:icon="@drawable/baseline_flight_black_24"
+            android:id="@+id/activity_main_drawer_business"
+            android:icon="@drawable/baseline_attach_money_black_24"
             android:title="@string/category_three" />
+        <item
+            android:id="@+id/activity_main_drawer_politics"
+            android:icon="@drawable/baseline_domain_black_24"
+            android:title="@string/category_four" />
+        <item
+            android:id="@+id/activity_main_drawer_science"
+            android:icon="@drawable/baseline_insert_chart_outlined_black_24"
+            android:title="@string/category_five" />
+        <item
+            android:id="@+id/activity_main_drawer_sport"
+            android:icon="@drawable/baseline_pool_black_24"
+            android:title="@string/category_six" />
+        <item
+            android:id="@+id/activity_main_drawer_tech"
+            android:icon="@drawable/baseline_wifi_black_24"
+            android:title="@string/category_seven" />
+        <item
+            android:id="@+id/activity_main_drawer_travel"
+            android:icon="@drawable/baseline_flight_black_24"
+            android:title="@string/category_eight" />
     </group>
 
 </menu>

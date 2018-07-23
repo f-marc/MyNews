@@ -1,15 +1,15 @@
 <LinearLayout
-    android:id="@+id/fragment_page_news_rootview"
+    android:id="@+id/fragment_page_stories_rootview"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fleury.marc.mynews.controllers.fragments.StoriesPageFragment"
+    tools:context="com.fleury.marc.mynews.controllers.fragments.home.StoriesPageFragment"
     android:gravity="center"
     android:background="#EDD9CF">
 
     <TextView
-        android:id="@+id/fragment_page_news_title"
+        android:id="@+id/fragment_page_stories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dip"

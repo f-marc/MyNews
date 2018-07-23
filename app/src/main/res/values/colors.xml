@@ -7,4 +7,14 @@
 
     <color name="hamburgerColor">#FFFFFF</color>
 
+    <!-- Category's fragments colors -->
+    <color name="artsColor">#F40000</color>
+    <color name="booksColor">#F48C00</color>
+    <color name="businessColor">#F3E801</color>
+    <color name="politicsColor">#1FF400</color>
+    <color name="scienceColor">#01F3F3</color>
+    <color name="sportsColor">#0000F4</color>
+    <color name="techColor">#AB00F4</color>
+    <color name="travelColor">#F400D0</color>
+
 </resources>
