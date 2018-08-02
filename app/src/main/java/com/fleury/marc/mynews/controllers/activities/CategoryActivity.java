@@ -35,14 +35,16 @@ public class CategoryActivity extends AppCompatActivity {
     private void configureToolbar(){
         this.toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
     private void runFragment(int mKey) {
-
+        // Transfer current bundle to the fragment
         CategoryFragment mFrag = new CategoryFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(KEY_CATEGORY_TWO, mKey);   //parameters are (key, value).
+        bundle.putInt(KEY_CATEGORY_TWO, mKey);
+        // Display the fragment on FrameLayout
         mFrag.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_category_frame_layout, mFrag).commit();
     }
@@ -50,7 +52,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //Inflate the menu and add it to the Toolbar
+        // Inflate the menu and add it to the Toolbar
         getMenuInflater().inflate(R.menu.activity_main_menu_toolbar, menu);
         return true;
     }
@@ -58,7 +60,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //3 - Handle actions on menu items
+        // Handle actions on menu items
         switch (item.getItemId()) {
             case R.id.activity_main_menu_params:
                 Toast.makeText(this, "Bouton 'plus'", Toast.LENGTH_LONG).show();

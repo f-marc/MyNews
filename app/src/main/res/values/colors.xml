@@ -6,6 +6,7 @@
     <color name="colorAccent">#F6E518</color>
 
     <color name="hamburgerColor">#FFFFFF</color>
+    <color name="backColor">#FFFFFF</color>
 
     <!-- Category's fragments colors -->
     <color name="artsColor">#F40000</color>
@@ -16,5 +17,10 @@
     <color name="sportsColor">#0000F4</color>
     <color name="techColor">#AB00F4</color>
     <color name="travelColor">#F400D0</color>
+
+    <!-- Article colors -->
+    <color name="categoryArticle">#202020</color>
+    <color name="dateArticle">#202020</color>
+    <color name="titleArticle">#717171</color>
 
 </resources>

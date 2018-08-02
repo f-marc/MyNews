@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.fleury.marc.mynews.controllers.fragments.home.MainFragment;
 import com.fleury.marc.mynews.controllers.fragments.home.StoriesPageFragment;
-import com.fleury.marc.mynews.controllers.fragments.home.PopularPageFragment;
 import com.fleury.marc.mynews.controllers.fragments.home.WorldPageFragment;
 
 public class PageAdapter extends FragmentPagerAdapter {
@@ -27,7 +27,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 0:
                 return StoriesPageFragment.newInstance();
             case 1:
-                return PopularPageFragment.newInstance();
+                return MainFragment.newInstance();
             case 2:
                 return WorldPageFragment.newInstance();
             default:

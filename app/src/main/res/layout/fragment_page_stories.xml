@@ -9,7 +9,7 @@
     android:background="#EDD9CF">
 
     <TextView
-        android:id="@+id/fragment_page_stories"
+        android:id="@+id/fragment_page_stories_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dip"
@@ -17,6 +17,6 @@
         android:textStyle="bold"
         android:textColor="#fff"
         android:textAlignment="center"
-        android:text="Test"/>
+        android:text="Test 1"/>
 
 </LinearLayout>

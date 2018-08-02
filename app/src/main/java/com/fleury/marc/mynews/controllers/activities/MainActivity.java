@@ -24,13 +24,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
-    // FOR FRAGMENTS
-    private Fragment fragmentArts, fragmentBooks, fragmentBusiness, fragmentPolitics,
-                     fragmentScience, fragmentSports, fragmentTech, fragmentTravel;
-
-    // FOR DATAS
     public static final int FRAGMENT_ARTS = 0, FRAGMENT_BOOKS = 1, FRAGMENT_BUSINESS = 2, FRAGMENT_POLITICS = 3,
                             FRAGMENT_SCIENCE = 4, FRAGMENT_SPORTS = 5, FRAGMENT_TECH = 6, FRAGMENT_TRAVEL = 7;
+
     public final static String KEY_CATEGORY = "KEY_CATEGORY";
 
 
@@ -56,15 +52,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id){
             case R.id.activity_main_drawer_art:
                 categoryActivityIntent.putExtra(KEY_CATEGORY, FRAGMENT_ARTS);
-                startActivity(categoryActivityIntent);
                 break;
             case R.id.activity_main_drawer_books:
                 categoryActivityIntent.putExtra(KEY_CATEGORY, FRAGMENT_BOOKS);
-                startActivity(categoryActivityIntent);
                 break;
             case R.id.activity_main_drawer_business:
                 categoryActivityIntent.putExtra(KEY_CATEGORY, FRAGMENT_BUSINESS);
-                startActivity(categoryActivityIntent);
                 break;
             case R.id.activity_main_drawer_politics:
                 categoryActivityIntent.putExtra(KEY_CATEGORY, FRAGMENT_POLITICS);
@@ -72,23 +65,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.activity_main_drawer_science:
                 categoryActivityIntent.putExtra(KEY_CATEGORY, FRAGMENT_SCIENCE);
-                startActivity(categoryActivityIntent);
                 break;
             case R.id.activity_main_drawer_sport:
                 categoryActivityIntent.putExtra(KEY_CATEGORY, FRAGMENT_SPORTS);
-                startActivity(categoryActivityIntent);
                 break;
             case R.id.activity_main_drawer_tech:
                 categoryActivityIntent.putExtra(KEY_CATEGORY, FRAGMENT_TECH);
-                startActivity(categoryActivityIntent);
                 break;
             case R.id.activity_main_drawer_travel:
                 categoryActivityIntent.putExtra(KEY_CATEGORY, FRAGMENT_TRAVEL);
-                startActivity(categoryActivityIntent);
                 break;
             default:
                 break;
         }
+        startActivity(categoryActivityIntent);
+
         this.drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }

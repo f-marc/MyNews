@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +26,12 @@ import butterknife.ButterKnife;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
-public class WorldPageFragment extends Fragment {
+public class MainFragment extends Fragment {
 
     // FOR DESIGN
-    @BindView(R.id.fragment_page_world_recycler_view) RecyclerView recyclerView; // 1 - Declare RecyclerView
+    @BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView; // 1 - Declare RecyclerView
     // 1 - Declare the SwipeRefreshLayout
-    @BindView(R.id.fragment_page_world_swipe_container) SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.fragment_main_swipe_container) SwipeRefreshLayout swipeRefreshLayout;
 
     //FOR DATA
     private Disposable disposable;
@@ -38,13 +39,13 @@ public class WorldPageFragment extends Fragment {
     private List<GithubUser> githubUsers;
     private GithubUserAdapter adapter;
 
-    public static WorldPageFragment newInstance() {
-        return new WorldPageFragment();
+    public static MainFragment newInstance() {
+        return new MainFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_page_world, container, false);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view);
         this.configureRecyclerView(); // Call during UI creation
         this.configureSwipeRefreshLayout(); // Configure the SwipeRefreshLayout

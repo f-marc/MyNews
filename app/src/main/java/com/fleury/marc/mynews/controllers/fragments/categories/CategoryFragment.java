@@ -21,6 +21,9 @@ public class CategoryFragment extends Fragment {
     @BindView(R.id.fragment_category_rootview) LinearLayout mLayout;
     @BindView(R.id.fragment_page_category_title) TextView mTextView;
 
+    public static final int FRAGMENT_ARTS = 0, FRAGMENT_BOOKS = 1, FRAGMENT_BUSINESS = 2, FRAGMENT_POLITICS = 3,
+            FRAGMENT_SCIENCE = 4, FRAGMENT_SPORTS = 5, FRAGMENT_TECH = 6, FRAGMENT_TRAVEL = 7;
+
     public static CategoryFragment newInstance() {
         return (new CategoryFragment());
     }
@@ -45,35 +48,35 @@ public class CategoryFragment extends Fragment {
     public void updateLayout(int mKey, LinearLayout mLayout, TextView mTitle) {
 
         switch(mKey) {
-            case 0:
+            case FRAGMENT_ARTS:
                 mLayout.setBackgroundColor(getResources().getColor(R.color.artsColor));
                 mTitle.setText("Arts Fragment");
                 break;
-            case 1:
+            case FRAGMENT_BOOKS:
                 mLayout.setBackgroundColor(getResources().getColor(R.color.booksColor));
                 mTitle.setText("Books Fragment");
                 break;
-            case 2:
+            case FRAGMENT_BUSINESS:
                 mLayout.setBackgroundColor(getResources().getColor(R.color.businessColor));
                 mTitle.setText("Business Fragment");
                 break;
-            case 3:
+            case FRAGMENT_POLITICS:
                 mLayout.setBackgroundColor(getResources().getColor(R.color.politicsColor));
                 mTitle.setText("Politics Fragment");
                 break;
-            case 4:
+            case FRAGMENT_SCIENCE:
                 mLayout.setBackgroundColor(getResources().getColor(R.color.scienceColor));
                 mTitle.setText("Science Fragment");
                 break;
-            case 5:
+            case FRAGMENT_SPORTS:
                 mLayout.setBackgroundColor(getResources().getColor(R.color.sportsColor));
                 mTitle.setText("Sports Fragment");
                 break;
-            case 6:
+            case FRAGMENT_TECH:
                 mLayout.setBackgroundColor(getResources().getColor(R.color.techColor));
                 mTitle.setText("Tech Fragment");
                 break;
-            case 7:
+            case FRAGMENT_TRAVEL:
                 mLayout.setBackgroundColor(getResources().getColor(R.color.travelColor));
                 mTitle.setText("Travel Fragment");
                 break;
