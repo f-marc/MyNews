@@ -20,7 +20,7 @@
             android:layout_alignParentTop="true" />
 
         <TextView
-            android:id="@+id/fragment_main_item_website"
+            android:id="@+id/fragment_main_item_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
@@ -30,7 +30,7 @@
             android:textColor="@color/categoryArticle"
             android:textSize="13sp"
             android:textStyle="bold"
-            android:text="Category > Test"/>
+            android:text=""/>
 
         <TextView
             android:id="@+id/fragment_main_item_title"
@@ -41,8 +41,10 @@
             android:layout_alignBottom="@+id/fragment_main_item_image"
             android:layout_toEndOf="@+id/fragment_main_item_image"
             android:textColor="@color/titleArticle"
-            android:textSize="22sp"
-            android:text="Testblabla"/>
+            android:textSize="18sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text=""/>
 
         <TextView
             android:id="@+id/fragment_main_item_date"
@@ -53,7 +55,7 @@
             android:layout_alignParentTop="true"
             android:textColor="@color/dateArticle"
             android:textSize="13sp"
-            android:text="09/08/18"/>
+            android:text=""/>
 
     </RelativeLayout>
 

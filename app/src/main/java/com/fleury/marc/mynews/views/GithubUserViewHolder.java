@@ -18,7 +18,7 @@ public class GithubUserViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.fragment_main_item_title) TextView textView;
     // 1 - Adding a TextView and an ImageView
-    @BindView(R.id.fragment_main_item_website) TextView texViewWebsite;
+    @BindView(R.id.fragment_main_item_category) TextView texViewWebsite;
     @BindView(R.id.fragment_main_item_image) ImageView imageView;
 
     public GithubUserViewHolder(View itemView) {

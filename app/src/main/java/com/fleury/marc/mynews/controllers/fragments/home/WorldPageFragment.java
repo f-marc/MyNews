@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.fleury.marc.mynews.R;
-import com.fleury.marc.mynews.models.GithubUser;
-import com.fleury.marc.mynews.utils.GithubStreams;
+import com.fleury.marc.mynews.models.MediaMetadatum;
+import com.fleury.marc.mynews.models.NYTimesResponse;
+import com.fleury.marc.mynews.models.Result;
 import com.fleury.marc.mynews.utils.ItemClickSupport;
-import com.fleury.marc.mynews.views.GithubUserAdapter;
+import com.fleury.marc.mynews.utils.NYTimesStreams;
+import com.fleury.marc.mynews.views.NYTimesWorldAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +32,16 @@ public class WorldPageFragment extends Fragment {
 
     // FOR DESIGN
     @BindView(R.id.fragment_page_world_recycler_view) RecyclerView recyclerView; // 1 - Declare RecyclerView
-    // 1 - Declare the SwipeRefreshLayout
+    // Declare the SwipeRefreshLayout
     @BindView(R.id.fragment_page_world_swipe_container) SwipeRefreshLayout swipeRefreshLayout;
 
     //FOR DATA
     private Disposable disposable;
-    // 2 - Declare list of users (GithubUser) & Adapter
-    private List<GithubUser> githubUsers;
-    private GithubUserAdapter adapter;
+    // Declare list of results & Adapter
+    private List<Result> nyTimesResponse;
+    private NYTimesWorldAdapter adapter;
+
+    public static final String key = "061416d2a6f642c9b295500c8eadd4e3";
 
     public static WorldPageFragment newInstance() {
         return new WorldPageFragment();
@@ -70,9 +75,9 @@ public class WorldPageFragment extends Fragment {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         // Get user from adapter
-                        GithubUser user = adapter.getUser(position);
+                        Result article = adapter.getArticle(position);
                         // Show result in a Toast
-                        Toast.makeText(getContext(), "You clicked on user : "+user.getLogin(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "URL : " + article.getMedia(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -84,9 +89,9 @@ public class WorldPageFragment extends Fragment {
     // Configure RecyclerView, Adapter, LayoutManager & glue it together
     private void configureRecyclerView(){
         // 1 - Reset list
-        this.githubUsers = new ArrayList<>();
+        this.nyTimesResponse = new ArrayList<>();
         // 2 - Create adapter passing the list of users
-        this.adapter = new GithubUserAdapter(this.githubUsers, Glide.with(this));
+        this.adapter = new NYTimesWorldAdapter(this.nyTimesResponse, Glide.with(this));
         // 3 - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.adapter);
         // 4 - Set layout manager to position the items
@@ -108,15 +113,17 @@ public class WorldPageFragment extends Fragment {
     // -------------------
 
     private void executeHttpRequestWithRetrofit(){
-        this.disposable = GithubStreams.streamFetchUserFollowing("JakeWharton").subscribeWith(new DisposableObserver<List<GithubUser>>() {
+        this.disposable = NYTimesStreams.streamFetchArticleWorld(key).subscribeWith(new DisposableObserver<NYTimesResponse>() {
             @Override
-            public void onNext(List<GithubUser> users) {
+            public void onNext(NYTimesResponse response) {
                 // Update RecyclerView after getting results from Github API
-                updateUI(users);
+                updateUI(response.getResults());
             }
 
             @Override
-            public void onError(Throwable e) { }
+            public void onError(Throwable e) {
+                Log.e("test", "réponse");
+            }
 
             @Override
             public void onComplete() { }
@@ -131,11 +138,11 @@ public class WorldPageFragment extends Fragment {
     // UPDATE UI
     // -------------------
 
-    private void updateUI(List<GithubUser> users){
-        // Stop refreshing and clear actual list of users
+    private void updateUI(List<Result> articles){
+        // Stop refreshing and clear actual list of articles
         swipeRefreshLayout.setRefreshing(false);
-        githubUsers.clear();
-        githubUsers.addAll(users);
+        nyTimesResponse.clear();
+        nyTimesResponse.addAll(articles);
         adapter.notifyDataSetChanged();
     }
 }
