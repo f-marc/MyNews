@@ -1,11 +1,11 @@
 package com.fleury.marc.mynews.controllers.fragments.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.fleury.marc.mynews.R;
-import com.fleury.marc.mynews.models.MediaMetadatum;
+import com.fleury.marc.mynews.controllers.activities.WebViewActivity;
 import com.fleury.marc.mynews.models.NYTimesResponse;
 import com.fleury.marc.mynews.models.Result;
 import com.fleury.marc.mynews.utils.ItemClickSupport;
@@ -37,11 +37,12 @@ public class WorldPageFragment extends Fragment {
 
     //FOR DATA
     private Disposable disposable;
-    // Declare list of results & Adapter
     private List<Result> nyTimesResponse;
     private NYTimesWorldAdapter adapter;
 
-    public static final String key = "061416d2a6f642c9b295500c8eadd4e3";
+    public final static String key = "061416d2a6f642c9b295500c8eadd4e3";
+    public final static String KEY_URL = "KEY_URL";
+
 
     public static WorldPageFragment newInstance() {
         return new WorldPageFragment();
@@ -74,10 +75,12 @@ public class WorldPageFragment extends Fragment {
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        // Get user from adapter
+                        // Get article from adapter
                         Result article = adapter.getArticle(position);
-                        // Show result in a Toast
-                        Toast.makeText(getContext(), "URL : " + article.getMedia(), Toast.LENGTH_SHORT).show();
+                        // Open the WebView in a new Activity
+                        Intent webViewActivityIntent = new Intent(getContext(), WebViewActivity.class);
+                        webViewActivityIntent.putExtra(KEY_URL, article.getUrl());
+                        startActivity(webViewActivityIntent);
                     }
                 });
     }
@@ -121,9 +124,7 @@ public class WorldPageFragment extends Fragment {
             }
 
             @Override
-            public void onError(Throwable e) {
-                Log.e("test", "réponse");
-            }
+            public void onError(Throwable e) { }
 
             @Override
             public void onComplete() { }

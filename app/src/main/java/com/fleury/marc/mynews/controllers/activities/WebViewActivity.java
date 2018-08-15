@@ -1,31 +1,37 @@
 package com.fleury.marc.mynews.controllers.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.fleury.marc.mynews.R;
-import com.fleury.marc.mynews.controllers.fragments.others.CategoryFragment;
 
-public class CategoryActivity extends AppCompatActivity {
+public class WebViewActivity extends AppCompatActivity {
 
-    public final static String KEY_CATEGORY_TWO = "KEY_CATEGORY_TWO";
     private Toolbar toolbar;
+    private WebView mWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
+        mWebView = findViewById(R.id.webview);
+
         Bundle mExtra = getIntent().getExtras();
-        int mKey = mExtra.getInt("KEY_CATEGORY");
+        String mKey = mExtra.getString("KEY_URL");
+        Log.i("Test", mKey);
 
         configureToolbar();
-        runFragment(mKey);
+
+        //mWebView.setWebViewClient(new WebViewClient());
+        //mWebView.loadUrl(mKey);
     }
 
 
@@ -33,17 +39,6 @@ public class CategoryActivity extends AppCompatActivity {
         this.toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-
-    private void runFragment(int mKey) {
-        // Transfer current bundle to the fragment
-        CategoryFragment mFrag = new CategoryFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(KEY_CATEGORY_TWO, mKey);
-        // Display the fragment on FrameLayout
-        mFrag.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_category_frame_layout, mFrag).commit();
     }
 
 
@@ -69,4 +64,5 @@ public class CategoryActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }

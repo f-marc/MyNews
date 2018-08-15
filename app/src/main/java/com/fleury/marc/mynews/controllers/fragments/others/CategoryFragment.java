@@ -1,4 +1,4 @@
-package com.fleury.marc.mynews.controllers.fragments.categories;
+package com.fleury.marc.mynews.controllers.fragments.others;
 
 
 import android.os.Bundle;

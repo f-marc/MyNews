@@ -37,7 +37,7 @@ public class NYTimesWorldAdapter extends RecyclerView.Adapter<NYTimesWorldViewHo
         return new NYTimesWorldViewHolder(view);
     }
 
-    // UPDATE VIEW HOLDER WITH A GITHUBUSER
+    // UPDATE VIEW HOLDER WITH AN ARTICLE
     @Override
     public void onBindViewHolder(NYTimesWorldViewHolder viewHolder, int position) {
         // - 3 Passing the Glide object to each ViewHolder
