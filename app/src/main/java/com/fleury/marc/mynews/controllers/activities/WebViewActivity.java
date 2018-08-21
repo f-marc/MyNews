@@ -20,7 +20,7 @@ public class WebViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category);
+        setContentView(R.layout.activity_webview);
 
         mWebView = findViewById(R.id.webview);
 
@@ -30,8 +30,10 @@ public class WebViewActivity extends AppCompatActivity {
 
         configureToolbar();
 
-        //mWebView.setWebViewClient(new WebViewClient());
-        //mWebView.loadUrl(mKey);
+        mWebView.setWebViewClient(new WebViewClient());
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setUseWideViewPort(true);
+        mWebView.loadUrl(mKey);
     }
 
 

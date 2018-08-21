@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.RequestManager;
 import com.fleury.marc.mynews.R;
+import com.fleury.marc.mynews.models.MediaMetadatum;
 import com.fleury.marc.mynews.models.Result;
 
 import java.util.List;
@@ -22,8 +23,8 @@ public class NYTimesWorldAdapter extends RecyclerView.Adapter<NYTimesWorldViewHo
     private RequestManager glide;
 
     // 2 - Updating our constructor adding a Glide Object
-    public NYTimesWorldAdapter(List<Result> nyTimesWorld, RequestManager glide) {
-        this.newsList = nyTimesWorld;
+    public NYTimesWorldAdapter(List<Result> newsList, RequestManager glide) {
+        this.newsList = newsList;
         this.glide = glide;
     }
 
@@ -40,7 +41,7 @@ public class NYTimesWorldAdapter extends RecyclerView.Adapter<NYTimesWorldViewHo
     // UPDATE VIEW HOLDER WITH AN ARTICLE
     @Override
     public void onBindViewHolder(NYTimesWorldViewHolder viewHolder, int position) {
-        // - 3 Passing the Glide object to each ViewHolder
+        // Passing the Glide object to each ViewHolder
         viewHolder.updateWithNYTimesWorld(this.newsList.get(position), this.glide);
     }
 

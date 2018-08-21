@@ -9,11 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.fleury.marc.mynews.R;
 import com.fleury.marc.mynews.controllers.activities.WebViewActivity;
+import com.fleury.marc.mynews.models.MediaMetadatum;
 import com.fleury.marc.mynews.models.NYTimesResponse;
 import com.fleury.marc.mynews.models.Result;
 import com.fleury.marc.mynews.utils.ItemClickSupport;

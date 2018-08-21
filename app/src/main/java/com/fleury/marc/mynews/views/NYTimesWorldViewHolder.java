@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.fleury.marc.mynews.R;
+import com.fleury.marc.mynews.models.MediaMetadatum;
 import com.fleury.marc.mynews.models.Result;
 
 import butterknife.BindView;
@@ -27,9 +28,10 @@ public class NYTimesWorldViewHolder extends RecyclerView.ViewHolder {
 
     public void updateWithNYTimesWorld(Result result, RequestManager glide){
         // Update TextView & ImageView
+
         this.textView.setText(result.getTitle());
         this.textViewCategory.setText(result.getSection());
         this.textViewDate.setText(result.getPublishedDate().replace("-", "/"));
-        //glide.load(media.getUrl()).into(imageView);
+        glide.load(result.getMedia().get(0).getMediaMetadata().get(0).getUrl()).into(imageView);
     }
 }
