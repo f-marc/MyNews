@@ -46,27 +46,4 @@ public class CategoryActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_category_frame_layout, mFrag).commit();
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu and add it to the Toolbar
-        getMenuInflater().inflate(R.menu.activity_main_menu_toolbar, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle actions on menu items
-        switch (item.getItemId()) {
-            case R.id.activity_main_menu_params:
-                Toast.makeText(this, "Bouton 'plus'", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.activity_main_menu_search:
-                Toast.makeText(this, "Bouton 'recherche'", Toast.LENGTH_LONG).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 }

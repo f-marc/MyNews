@@ -16,11 +16,17 @@ import retrofit2.http.Query;
 
 public interface NYTimesService {
 
+    @GET("topstories/v2/home.json")
+    Observable<NYTimesResponse> getStories(@Query("api-key") String key);
+
+    @GET("mostpopular/v2/mostviewed/all-sections/1.json")
+    Observable<NYTimesResponse> getPopular(@Query("api-key") String key);
+
     @GET("mostpopular/v2/mostviewed/World/1.json")
     Observable<NYTimesResponse> getWorld(@Query("api-key") String key);
 
-    //@GET("/users/{username}")
-    //Observable<GithubUserInfo> getUserInfos(@Path("username") String username);
+    @GET("search/v2/articlesearch.json")
+    Observable<NYTimesResponse> getSearch(@Query("api-key") String key, @Query("facet_field") String category);
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")

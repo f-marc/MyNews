@@ -9,12 +9,11 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.RequestManager;
 import com.fleury.marc.mynews.R;
-import com.fleury.marc.mynews.models.MediaMetadatum;
 import com.fleury.marc.mynews.models.Result;
 
 import java.util.List;
 
-public class NYTimesWorldAdapter extends RecyclerView.Adapter<NYTimesWorldViewHolder> {
+public class NYTimesAdapter extends RecyclerView.Adapter<NYTimesViewHolder> {
 
     // FOR DATA
     private List<Result> newsList;
@@ -23,26 +22,26 @@ public class NYTimesWorldAdapter extends RecyclerView.Adapter<NYTimesWorldViewHo
     private RequestManager glide;
 
     // 2 - Updating our constructor adding a Glide Object
-    public NYTimesWorldAdapter(List<Result> newsList, RequestManager glide) {
+    public NYTimesAdapter(List<Result> newsList, RequestManager glide) {
         this.newsList = newsList;
         this.glide = glide;
     }
 
     @Override
-    public NYTimesWorldViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public NYTimesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // CREATE VIEW HOLDER AND INFLATING ITS XML LAYOUT
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.fragment_main_item, parent, false);
 
-        return new NYTimesWorldViewHolder(view);
+        return new NYTimesViewHolder(view);
     }
 
     // UPDATE VIEW HOLDER WITH AN ARTICLE
     @Override
-    public void onBindViewHolder(NYTimesWorldViewHolder viewHolder, int position) {
+    public void onBindViewHolder(NYTimesViewHolder viewHolder, int position) {
         // Passing the Glide object to each ViewHolder
-        viewHolder.updateWithNYTimesWorld(this.newsList.get(position), this.glide);
+        viewHolder.updateWithNYTimes(this.newsList.get(position), this.glide);
     }
 
     // RETURN THE TOTAL COUNT OF ITEMS IN THE LIST

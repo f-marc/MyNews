@@ -18,16 +18,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/activity_category_frame_layout">
-        <TextView
-            android:id="@+id/test_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dip"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:textAlignment="center"
-            android:text=""/>
     </FrameLayout>
 
 </LinearLayout>

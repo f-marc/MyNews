@@ -13,12 +13,11 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.fleury.marc.mynews.R;
 import com.fleury.marc.mynews.controllers.activities.WebViewActivity;
-import com.fleury.marc.mynews.models.MediaMetadatum;
 import com.fleury.marc.mynews.models.NYTimesResponse;
 import com.fleury.marc.mynews.models.Result;
 import com.fleury.marc.mynews.utils.ItemClickSupport;
 import com.fleury.marc.mynews.utils.NYTimesStreams;
-import com.fleury.marc.mynews.views.NYTimesWorldAdapter;
+import com.fleury.marc.mynews.views.NYTimesAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +30,14 @@ import io.reactivex.observers.DisposableObserver;
 public class WorldPageFragment extends Fragment {
 
     // FOR DESIGN
-    @BindView(R.id.fragment_page_world_recycler_view) RecyclerView recyclerView; // 1 - Declare RecyclerView
+    @BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView;
     // Declare the SwipeRefreshLayout
-    @BindView(R.id.fragment_page_world_swipe_container) SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.fragment_main_swipe_container) SwipeRefreshLayout swipeRefreshLayout;
 
     //FOR DATA
     private Disposable disposable;
     private List<Result> nyTimesResponse;
-    private NYTimesWorldAdapter adapter;
+    private NYTimesAdapter adapter;
 
     public final static String key = "061416d2a6f642c9b295500c8eadd4e3";
     public final static String KEY_URL = "KEY_URL";
@@ -50,7 +49,7 @@ public class WorldPageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_page_world, container, false);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view);
         this.configureRecyclerView(); // Call during UI creation
         this.configureSwipeRefreshLayout(); // Configure the SwipeRefreshLayout
@@ -94,7 +93,7 @@ public class WorldPageFragment extends Fragment {
         // 1 - Reset list
         this.nyTimesResponse = new ArrayList<>();
         // 2 - Create adapter passing the list of users
-        this.adapter = new NYTimesWorldAdapter(this.nyTimesResponse, Glide.with(this));
+        this.adapter = new NYTimesAdapter(this.nyTimesResponse, Glide.with(this));
         // 3 - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.adapter);
         // 4 - Set layout manager to position the items
@@ -119,7 +118,7 @@ public class WorldPageFragment extends Fragment {
         this.disposable = NYTimesStreams.streamFetchArticleWorld(key).subscribeWith(new DisposableObserver<NYTimesResponse>() {
             @Override
             public void onNext(NYTimesResponse response) {
-                // Update RecyclerView after getting results from Github API
+                // Update RecyclerView after getting results from API
                 updateUI(response.getResults());
             }
 

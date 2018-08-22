@@ -8,25 +8,24 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.fleury.marc.mynews.R;
-import com.fleury.marc.mynews.models.MediaMetadatum;
 import com.fleury.marc.mynews.models.Result;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NYTimesWorldViewHolder extends RecyclerView.ViewHolder {
+public class NYTimesViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.fragment_main_item_title) TextView textView;
     @BindView(R.id.fragment_main_item_category) TextView textViewCategory;
     @BindView(R.id.fragment_main_item_date) TextView textViewDate;
     @BindView(R.id.fragment_main_item_image) ImageView imageView;
 
-    public NYTimesWorldViewHolder(View itemView) {
+    public NYTimesViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithNYTimesWorld(Result result, RequestManager glide){
+    public void updateWithNYTimes(Result result, RequestManager glide){
         // Update TextView & ImageView
 
         this.textView.setText(result.getTitle());
