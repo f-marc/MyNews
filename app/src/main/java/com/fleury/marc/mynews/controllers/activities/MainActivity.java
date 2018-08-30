@@ -139,11 +139,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         //3 - Handle actions on menu items
         switch (item.getItemId()) {
-            case R.id.activity_main_menu_params:
-                Toast.makeText(this, "Bouton 'plus'", Toast.LENGTH_LONG).show();
-                return true;
             case R.id.activity_main_menu_search:
                 Toast.makeText(this, "Bouton 'recherche'", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.activity_main_menu_notif:
+                Toast.makeText(this, "Bouton 'notif'", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.activity_main_menu_help:
+                Toast.makeText(this, "Bouton 'help'", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.activity_main_menu_about:
+                Toast.makeText(this, "Bouton 'about'", Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

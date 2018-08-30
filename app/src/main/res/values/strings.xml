@@ -4,6 +4,9 @@
     <!-- Used in Toolbar -->
     <string name="search">Search</string>
     <string name="param">Parameters</string>
+    <string name="notif">Notifications</string>
+    <string name="help">Help</string>
+    <string name="about">About</string>
 
     <!-- Used in MenuDrawer -->
     <string name="category_one">Arts</string>

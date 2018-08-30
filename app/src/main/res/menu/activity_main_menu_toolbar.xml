@@ -7,9 +7,18 @@
         android:title="@string/search">
     </item>
     <item
-        android:id="@+id/activity_main_menu_params"
-        android:icon="@drawable/baseline_more_vert_white_24"
-        app:showAsAction="ifRoom"
-        android:title="@string/param">
+        android:id="@+id/activity_main_menu_notif"
+        app:showAsAction="never"
+        android:title="@string/notif">
+    </item>
+    <item
+        android:id="@+id/activity_main_menu_help"
+        app:showAsAction="never"
+        android:title="@string/help">
+    </item>
+    <item
+        android:id="@+id/activity_main_menu_about"
+        app:showAsAction="never"
+        android:title="@string/about">
     </item>
 </menu>

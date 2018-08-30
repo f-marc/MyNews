@@ -11,17 +11,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fleury.marc.mynews.R;
 import com.fleury.marc.mynews.controllers.activities.WebViewActivity;
-import com.fleury.marc.mynews.models.NYTimesResponse;
-import com.fleury.marc.mynews.models.Result;
+import com.fleury.marc.mynews.models.popular.NYTimesResponse;
+import com.fleury.marc.mynews.models.popular.Result;
 import com.fleury.marc.mynews.utils.ItemClickSupport;
 import com.fleury.marc.mynews.utils.NYTimesStreams;
-import com.fleury.marc.mynews.views.NYTimesAdapter;
+import com.fleury.marc.mynews.views.PopularAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +40,7 @@ public class CategoryFragment extends Fragment {
     //FOR DATA
     private Disposable disposable;
     private List<Result> nyTimesResponse;
-    private NYTimesAdapter adapter;
+    private PopularAdapter adapter;
 
     public final static String key = "061416d2a6f642c9b295500c8eadd4e3";
     public final static String KEY_URL = "KEY_URL";
@@ -109,7 +107,7 @@ public class CategoryFragment extends Fragment {
         // 1 - Reset list
         this.nyTimesResponse = new ArrayList<>();
         // 2 - Create adapter passing the list of users
-        this.adapter = new NYTimesAdapter(this.nyTimesResponse, Glide.with(this));
+        this.adapter = new PopularAdapter(this.nyTimesResponse, Glide.with(this));
         // 3 - Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.adapter);
         // 4 - Set layout manager to position the items

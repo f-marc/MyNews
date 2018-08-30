@@ -1,7 +1,7 @@
 package com.fleury.marc.mynews.utils;
 
 
-import com.fleury.marc.mynews.models.NYTimesResponse;
+import com.fleury.marc.mynews.models.popular.NYTimesResponse;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers;
 public class NYTimesStreams {
 
 
-    public static Observable<NYTimesResponse> streamFetchArticleStories(String key){
+    public static Observable<com.fleury.marc.mynews.models.stories.NYTimesResponse> streamFetchArticleStories(String key){
         NYTimesService nyTimesService = NYTimesService.retrofit.create(NYTimesService.class);
         return nyTimesService.getStories(key)
                 .subscribeOn(Schedulers.io())

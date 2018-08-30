@@ -1,4 +1,4 @@
-package com.fleury.marc.mynews.models;
+package com.fleury.marc.mynews.models.popular;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

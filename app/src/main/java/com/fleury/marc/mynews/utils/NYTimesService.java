@@ -1,23 +1,20 @@
 package com.fleury.marc.mynews.utils;
 
 
-import com.fleury.marc.mynews.models.NYTimesResponse;
-
-import java.util.List;
+import com.fleury.marc.mynews.models.popular.NYTimesResponse;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
 public interface NYTimesService {
 
     @GET("topstories/v2/home.json")
-    Observable<NYTimesResponse> getStories(@Query("api-key") String key);
+    Observable<com.fleury.marc.mynews.models.stories.NYTimesResponse> getStories(@Query("api-key") String key);
 
     @GET("mostpopular/v2/mostviewed/all-sections/1.json")
     Observable<NYTimesResponse> getPopular(@Query("api-key") String key);

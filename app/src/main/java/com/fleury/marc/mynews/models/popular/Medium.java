@@ -1,4 +1,4 @@
-package com.fleury.marc.mynews.models;
+package com.fleury.marc.mynews.models.popular;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
