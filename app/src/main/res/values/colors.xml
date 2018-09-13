@@ -3,7 +3,7 @@
 
     <color name="colorPrimary">#16AEC9</color>
     <color name="colorPrimaryDark">#118595</color>
-    <color name="colorAccent">#F6E518</color>
+    <color name="colorAccent">#16AEC9</color>
 
     <color name="hamburgerColor">#FFFFFF</color>
     <color name="backColor">#FFFFFF</color>
@@ -18,9 +18,9 @@
     <color name="techColor">#AB00F4</color>
     <color name="travelColor">#F400D0</color>
 
-    <!-- Article colors -->
-    <color name="categoryArticle">#202020</color>
-    <color name="dateArticle">#202020</color>
-    <color name="titleArticle">#717171</color>
+    <!-- Text colors -->
+    <color name="mainColor">#202020</color>
+    <color name="secondaryColor">#717171</color>
+    <color name="thirdColor">#B2B2B2</color>
 
 </resources>

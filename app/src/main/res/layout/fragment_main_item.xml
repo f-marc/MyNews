@@ -27,7 +27,7 @@
             android:paddingTop="1dp"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/fragment_main_item_image"
-            android:textColor="@color/categoryArticle"
+            android:textColor="@color/mainColor"
             android:textSize="13sp"
             android:textStyle="bold"
             android:text=""/>
@@ -40,7 +40,7 @@
             android:paddingBottom="1dp"
             android:layout_alignBottom="@+id/fragment_main_item_image"
             android:layout_toEndOf="@+id/fragment_main_item_image"
-            android:textColor="@color/titleArticle"
+            android:textColor="@color/secondaryColor"
             android:textSize="18sp"
             android:maxLines="2"
             android:ellipsize="end"
@@ -53,7 +53,7 @@
             android:paddingTop="1dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:textColor="@color/dateArticle"
+            android:textColor="@color/mainColor"
             android:textSize="13sp"
             android:text=""/>
 

@@ -22,6 +22,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="notification_editText_hint">Search query term</string>
+    <string name="notification_textView">Enable notifications (once per day)</string>
+
 </resources>

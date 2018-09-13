@@ -143,7 +143,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Bouton 'recherche'", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.activity_main_menu_notif:
-                Toast.makeText(this, "Bouton 'notif'", Toast.LENGTH_LONG).show();
+                Intent notificationActivity = new Intent(MainActivity.this, NotificationActivity.class);
+                startActivity(notificationActivity);
+                //Toast.makeText(this, "Bouton 'notif'", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.activity_main_menu_help:
                 Toast.makeText(this, "Bouton 'help'", Toast.LENGTH_LONG).show();

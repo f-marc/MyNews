@@ -3,10 +3,6 @@ package com.fleury.marc.mynews.controllers.activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.fleury.marc.mynews.R;
 import com.fleury.marc.mynews.controllers.fragments.others.CategoryFragment;

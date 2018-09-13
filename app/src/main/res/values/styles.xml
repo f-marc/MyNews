@@ -1,6 +1,6 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="drawerArrowStyle">@style/DrawerIcon</item>
         <item name="colorControlNormal">@color/backColor</item>
@@ -10,9 +10,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- Hamburger color. -->
+    <!-- Hamburger color -->
     <style name="DrawerIcon" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/hamburgerColor</item>
+    </style>
+
+    <!-- CheckBox -->
+    <style name="CheckBoxStyle" parent="Base.Theme.AppCompat">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorSecondary">@color/secondaryColor</item>
     </style>
 
 </resources>

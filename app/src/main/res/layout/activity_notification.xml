@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.fleury.marc.mynews.controllers.activities.NotificationActivity">
+
+    <!-- Toolbar -->
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp">
+
+        <!-- EditText -->
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/activity_notification_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/notification_editText_hint"
+            android:textColorHint="@color/thirdColor"
+            app:backgroundTint="@color/colorPrimary" />
+
+        <!-- CheckBox -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="15dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/check_arts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category_one"
+                    android:textColor="@color/mainColor"
+                    app:theme="@style/CheckBoxStyle" />
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/check_books"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category_two"
+                    android:textColor="@color/mainColor"
+                    app:theme="@style/CheckBoxStyle" />
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/check_business"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category_three"
+                    android:textColor="@color/mainColor"
+                    app:theme="@style/CheckBoxStyle" />
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/check_politics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category_four"
+                    android:textColor="@color/mainColor"
+                    app:theme="@style/CheckBoxStyle" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/check_science"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category_five"
+                    android:textColor="@color/mainColor"
+                    app:theme="@style/CheckBoxStyle" />
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/check_sports"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category_six"
+                    android:textColor="@color/mainColor"
+                    app:theme="@style/CheckBoxStyle" />
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/check_tech"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category_seven"
+                    android:textColor="@color/mainColor"
+                    app:theme="@style/CheckBoxStyle" />
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/check_travel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category_eight"
+                    android:textColor="@color/mainColor"
+                    app:theme="@style/CheckBoxStyle" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Horizontal Line -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/thirdColor"/>
+        </LinearLayout>
+
+        <!-- Switch -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/notification_textView"
+                android:textColor="@color/mainColor"
+                android:textSize="17sp" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:paddingBottom="5dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
