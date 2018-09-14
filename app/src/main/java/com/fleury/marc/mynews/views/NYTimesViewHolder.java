@@ -38,6 +38,6 @@ public class NYTimesViewHolder extends RecyclerView.ViewHolder {
         this.textView.setText(result.getTitle());
         this.textViewCategory.setText(result.getSection());
         this.textViewDate.setText(result.getPublishedDate().replace("-", "/"));
-        glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
+        //glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
     }
 }

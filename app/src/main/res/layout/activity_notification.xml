@@ -28,7 +28,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/notification_editText_hint"
             android:textColorHint="@color/thirdColor"
-            app:backgroundTint="@color/colorPrimary" />
+            app:backgroundTint="@color/colorPrimary"
+            android:textCursorDrawable="@drawable/color_cursor"/>
 
         <!-- CheckBox -->
         <LinearLayout
