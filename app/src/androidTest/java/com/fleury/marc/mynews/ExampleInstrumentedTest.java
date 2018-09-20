@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
 
-    @Test
+    /*@Test
     public boolean internetAccess() {
         ConnectivityManager connectivityManager = (ConnectivityManager) MainActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -26,7 +26,7 @@ public class ExampleInstrumentedTest {
                 return true;
             } else return false;
         } else return false;
-    }
+    }*/
 
 }
 
