@@ -1,26 +1,32 @@
 package com.fleury.marc.mynews;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+
+import com.fleury.marc.mynews.controllers.activities.MainActivity;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
-    @Test
-    public void useAppContext() throws Exception {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.fleury.marc.mynews", appContext.getPackageName());
+    @Test
+    public boolean internetAccess() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) MainActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo != null) {
+            NetworkInfo.State networkState = networkInfo.getState();
+            if (networkState.compareTo(NetworkInfo.State.CONNECTED) == 0) {
+                return true;
+            } else return false;
+        } else return false;
     }
+
 }
+
