@@ -1,9 +1,12 @@
 package com.fleury.marc.mynews.controllers.activities;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
@@ -16,7 +19,9 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.fleury.marc.mynews.R;
+import com.fleury.marc.mynews.utils.AlarmReceiver;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,8 +43,11 @@ public class NotificationActivity extends AppCompatActivity {
     @BindView(R.id.check_tech) CheckBox check_tech;
     @BindView(R.id.check_travel) CheckBox check_travel;
 
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
     private SharedPreferences mPreferences;
     private Map<Integer, String> mList = new HashMap<>();
+    private String mText = mEditText.getText().toString();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +63,13 @@ public class NotificationActivity extends AppCompatActivity {
         // --- Switch ---
         updateSwitch();
 
-        if ((!mSwitch.isChecked()) && (mList.isEmpty())) {
+        /*if ((!mSwitch.isChecked()) && (!mList.isEmpty()) && (!mText.matches(""))) {
+            mSwitch.setEnabled(true);
+        } else if (mSwitch.isChecked()) {
+            mSwitch.setEnabled(true);
+        } else {
             mSwitch.setEnabled(false);
-        }
+        }*/
 
         configureToolbar();
     }
@@ -69,36 +81,6 @@ public class NotificationActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Notifications");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-
-    private void sendNotification() {
-        // TEST
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_DEFAULT);
-
-            // Configure the notification channel.
-            notificationChannel.setDescription("Channel description");
-            notificationChannel.enableLights(true);
-            notificationChannel.enableVibration(true);
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
-
-        notificationBuilder.setAutoCancel(true)
-                .setDefaults(Notification.DEFAULT_ALL)
-                .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.outline_library_books_black_48)
-                .setContentTitle("MyNews")
-                .setContentText("De nouveaux articles sont disponibles !")
-                .setPriority(Notification.PRIORITY_DEFAULT);
-
-        notificationManager.notify(1, notificationBuilder.build());
-    }
-
 
     private void updateCheckBox() {
         check_arts.setChecked(mPreferences.getBoolean("checkArts", false));
@@ -231,11 +213,23 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    //start alarm
-                    mPreferences.edit().putBoolean("switchCheck", true).apply();
+                    mPreferences.edit().putString("keyWord", mText).apply();
 
+                    alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+                    Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                    alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+                    // Set the alarm to start at 11:59 p.m.
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTimeInMillis(System.currentTimeMillis());
+                    calendar.set(Calendar.HOUR_OF_DAY, 23);
+                    calendar.set(Calendar.MINUTE, 59);
+                    // Set the alarm to repeat everyday
+                    alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+
+                    mPreferences.edit().putBoolean("switchCheck", true).apply();
                 } else {
-                    //cancel alarm
+                    alarmMgr.cancel(alarmIntent);
+
                     mEditText.getText().clear();
                     check_arts.setChecked(false);
                     check_books.setChecked(false);
@@ -245,6 +239,7 @@ public class NotificationActivity extends AppCompatActivity {
                     check_sports.setChecked(false);
                     check_tech.setChecked(false);
                     check_travel.setChecked(false);
+
                     mPreferences.edit().putBoolean("switchCheck", false).apply();
                 }
             }

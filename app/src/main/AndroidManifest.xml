@@ -40,6 +40,12 @@
             android:parentActivityName=".controllers.activities.MainActivity">
         </activity>
 
+        <receiver android:name=".utils.AlarmReceiver">
+            <intent-filter>
+                <action android:name=".controllers.activities.NotificationActivity" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
