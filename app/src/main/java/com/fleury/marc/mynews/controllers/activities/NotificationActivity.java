@@ -12,6 +12,9 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -47,7 +50,6 @@ public class NotificationActivity extends AppCompatActivity {
     private PendingIntent alarmIntent;
     private SharedPreferences mPreferences;
     private Map<Integer, String> mList = new HashMap<>();
-    private String mText = mEditText.getText().toString();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,29 +59,38 @@ public class NotificationActivity extends AppCompatActivity {
 
         mPreferences = this.getSharedPreferences("pref", MODE_PRIVATE);
 
-        // --- CheckBox ---
+        setSwitch();
+
+        updateEditText();
         updateCheckBox();
-
-        // --- Switch ---
         updateSwitch();
-
-        /*if ((!mSwitch.isChecked()) && (!mList.isEmpty()) && (!mText.matches(""))) {
-            mSwitch.setEnabled(true);
-        } else if (mSwitch.isChecked()) {
-            mSwitch.setEnabled(true);
-        } else {
-            mSwitch.setEnabled(false);
-        }*/
 
         configureToolbar();
     }
-
 
     private void configureToolbar() {
         this.toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Notifications");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void updateEditText() {
+        mEditText.setText(mPreferences.getString("keyWord", ""));
+        mEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                setSwitch();
+            }
+        });
     }
 
     private void updateCheckBox() {
@@ -98,11 +109,12 @@ public class NotificationActivity extends AppCompatActivity {
                 if (isChecked) {
                     mList.put(0, "arts");
                     mPreferences.edit().putBoolean("checkArts", true).apply();
-
+                    mSwitch.setChecked(false);
                 } else {
                     mList.remove(0);
                     mPreferences.edit().putBoolean("checkArts", false).apply();
                 }
+                setSwitch();
             }
         });
 
@@ -112,11 +124,12 @@ public class NotificationActivity extends AppCompatActivity {
                 if (isChecked) {
                     mList.put(1, "books");
                     mPreferences.edit().putBoolean("checkBooks", true).apply();
-
+                    mSwitch.setChecked(false);
                 } else {
                     mList.remove(1);
                     mPreferences.edit().putBoolean("checkBooks", false).apply();
                 }
+                setSwitch();
             }
         });
 
@@ -126,11 +139,12 @@ public class NotificationActivity extends AppCompatActivity {
                 if (isChecked) {
                     mList.put(2, "business");
                     mPreferences.edit().putBoolean("checkBusiness", true).apply();
-
+                    mSwitch.setChecked(false);
                 } else {
                     mList.remove(2);
                     mPreferences.edit().putBoolean("checkBusiness", false).apply();
                 }
+                setSwitch();
             }
         });
 
@@ -140,11 +154,12 @@ public class NotificationActivity extends AppCompatActivity {
                 if (isChecked) {
                     mList.put(3, "politics");
                     mPreferences.edit().putBoolean("checkPolitics", true).apply();
-
+                    mSwitch.setChecked(false);
                 } else {
                     mList.remove(3);
                     mPreferences.edit().putBoolean("checkPolitics", false).apply();
                 }
+                setSwitch();
             }
         });
 
@@ -154,11 +169,12 @@ public class NotificationActivity extends AppCompatActivity {
                 if (isChecked) {
                     mList.put(4, "science");
                     mPreferences.edit().putBoolean("checkScience", true).apply();
-
+                    mSwitch.setChecked(false);
                 } else {
                     mList.remove(4);
                     mPreferences.edit().putBoolean("checkScience", false).apply();
                 }
+                setSwitch();
             }
         });
 
@@ -168,11 +184,12 @@ public class NotificationActivity extends AppCompatActivity {
                 if (isChecked) {
                     mList.put(5, "sports");
                     mPreferences.edit().putBoolean("checkSports", true).apply();
-
+                    mSwitch.setChecked(false);
                 } else {
                     mList.remove(5);
                     mPreferences.edit().putBoolean("checkSports", false).apply();
                 }
+                setSwitch();
             }
         });
 
@@ -182,11 +199,12 @@ public class NotificationActivity extends AppCompatActivity {
                 if (isChecked) {
                     mList.put(6, "tech");
                     mPreferences.edit().putBoolean("checkTech", true).apply();
-
+                    mSwitch.setChecked(false);
                 } else {
                     mList.remove(6);
                     mPreferences.edit().putBoolean("checkTech", false).apply();
                 }
+                setSwitch();
             }
         });
 
@@ -196,11 +214,12 @@ public class NotificationActivity extends AppCompatActivity {
                 if (isChecked) {
                     mList.put(7, "travel");
                     mPreferences.edit().putBoolean("checkTravel", true).apply();
-
+                    mSwitch.setChecked(false);
                 } else {
                     mList.remove(7);
                     mPreferences.edit().putBoolean("checkTravel", false).apply();
                 }
+                setSwitch();
             }
         });
     }
@@ -213,6 +232,7 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    String mText = mEditText.getText().toString();
                     mPreferences.edit().putString("keyWord", mText).apply();
 
                     alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
@@ -228,9 +248,13 @@ public class NotificationActivity extends AppCompatActivity {
 
                     mPreferences.edit().putBoolean("switchCheck", true).apply();
                 } else {
+                    alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+                    Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                    alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
                     alarmMgr.cancel(alarmIntent);
 
                     mEditText.getText().clear();
+                    mPreferences.edit().remove("keyWord").apply();
                     check_arts.setChecked(false);
                     check_books.setChecked(false);
                     check_business.setChecked(false);
@@ -246,4 +270,13 @@ public class NotificationActivity extends AppCompatActivity {
         });
     }
 
+    public void setSwitch() {
+        if (!mList.isEmpty() && !mEditText.getText().toString().matches("")) {
+            mSwitch.setEnabled(true);
+        } else if (mSwitch.isChecked()) {
+            mSwitch.setEnabled(true);
+        } else {
+            mSwitch.setEnabled(false);
+        }
+    }
 }
