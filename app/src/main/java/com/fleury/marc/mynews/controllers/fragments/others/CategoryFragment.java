@@ -45,7 +45,7 @@ public class CategoryFragment extends Fragment {
     public final static String key = "061416d2a6f642c9b295500c8eadd4e3";
     public final static String KEY_URL = "KEY_URL";
     int mKey;
-    String category;
+    String section;
 
     public static final int FRAGMENT_ARTS = 0, FRAGMENT_BOOKS = 1, FRAGMENT_BUSINESS = 2, FRAGMENT_POLITICS = 3,
             FRAGMENT_SCIENCE = 4, FRAGMENT_SPORTS = 5, FRAGMENT_TECH = 6, FRAGMENT_TRAVEL = 7;
@@ -133,32 +133,32 @@ public class CategoryFragment extends Fragment {
         // Method for displaying the correct components.
         switch (mKey) {
             case FRAGMENT_ARTS:
-                category = "art";
+                section = "Arts";
                 break;
             case FRAGMENT_BOOKS:
-                category = "books";
+                section = "Books";
                 break;
             case FRAGMENT_BUSINESS:
-                category = "business";
+                section = "Business Day";
                 break;
             case FRAGMENT_POLITICS:
-                category = "politics";
+                section = "Politics";
                 break;
             case FRAGMENT_SCIENCE:
-                category = "science";
+                section = "Science";
                 break;
             case FRAGMENT_SPORTS:
-                category = "sports";
+                section = "Sports";
                 break;
             case FRAGMENT_TECH:
-                category = "technology";
+                section = "Technology";
                 break;
             case FRAGMENT_TRAVEL:
-                category = "travel";
+                section = "Travel";
                 break;
         }
 
-        this.disposable = NYTimesStreams.streamFetchArticleSearch(key, category).subscribeWith(new DisposableObserver<NYTimesResponse>() {
+        this.disposable = NYTimesStreams.streamFetchArticleSection(section, key).subscribeWith(new DisposableObserver<NYTimesResponse>() {
 
             @Override
             public void onNext(NYTimesResponse response) {
