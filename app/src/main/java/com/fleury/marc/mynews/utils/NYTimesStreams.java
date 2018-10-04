@@ -36,12 +36,20 @@ public class NYTimesStreams {
                 .timeout(10, TimeUnit.SECONDS);
     }
 
-    public static Observable<NYTimesResponse> streamFetchArticleSearch(String key, String category){
+    public static Observable<NYTimesResponse> streamFetchArticleSection(String section, String key){
+        NYTimesService nyTimesService = NYTimesService.retrofit.create(NYTimesService.class);
+        return nyTimesService.getSection(section, key)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(10, TimeUnit.SECONDS);
+    }
+
+    /*public static Observable<NYTimesResponse> streamFetchArticleSearch(String key, String category){
         NYTimesService nyTimesService = NYTimesService.retrofit.create(NYTimesService.class);
         return nyTimesService.getSearch(key, category)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);
-    }
+    }*/
 
 }

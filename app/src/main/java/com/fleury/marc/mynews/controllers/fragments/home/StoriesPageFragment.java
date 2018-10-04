@@ -27,19 +27,15 @@ import io.reactivex.observers.DisposableObserver;
 
 public class StoriesPageFragment extends Fragment {
 
-    // FOR DESIGN
     @BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView;
-    // Declare the SwipeRefreshLayout
     @BindView(R.id.fragment_main_swipe_container) SwipeRefreshLayout swipeRefreshLayout;
 
-    //FOR DATA
     private Disposable disposable;
     private List<com.fleury.marc.mynews.models.stories.Result> nyTimesResponse;
     private StoriesAdapter adapter;
 
     public final static String key = "061416d2a6f642c9b295500c8eadd4e3";
     public final static String KEY_URL = "KEY_URL";
-
 
     public static StoriesPageFragment newInstance() {
         return new StoriesPageFragment();

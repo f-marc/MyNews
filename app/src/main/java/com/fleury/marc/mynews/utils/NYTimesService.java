@@ -8,6 +8,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -22,8 +23,11 @@ public interface NYTimesService {
     @GET("mostpopular/v2/mostviewed/World/1.json")
     Observable<NYTimesResponse> getWorld(@Query("api-key") String key);
 
-    @GET("search/v2/articlesearch.json")
-    Observable<NYTimesResponse> getSearch(@Query("api-key") String key, @Query("facet_field") String category);
+    @GET("mostpopular/v2/mostviewed/{section}/1.json")
+    Observable<NYTimesResponse> getSection(@Path("section") String section, @Query("api-key") String key);
+
+    /*@GET("search/v2/articlesearch.json")
+    Observable<NYTimesResponse> getSearch(@Query("api-key") String key, @Query("facet_field") String category);*/
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")
