@@ -3,21 +3,20 @@ package com.fleury.marc.mynews.utils;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.fleury.marc.mynews.R;
+import com.fleury.marc.mynews.controllers.activities.MainActivity;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context,Intent intent){
-
-        Log.i("AlarmTest", "Alarm OK");
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
@@ -41,6 +40,9 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentTitle("MyNews")
                 .setContentText("New articles are available!")
                 .setPriority(Notification.PRIORITY_DEFAULT);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        notificationBuilder.setContentIntent(contentIntent);
 
         notificationManager.notify(1, notificationBuilder.build());
     }
