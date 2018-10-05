@@ -40,6 +40,13 @@
             android:parentActivityName=".controllers.activities.MainActivity">
         </activity>
 
+        <!-- SearchActivity -->
+        <activity
+            android:name=".controllers.activities.SearchActivity"
+            android:parentActivityName=".controllers.activities.MainActivity">
+        </activity>
+
+        <!-- AlarmReceiver -->
         <receiver android:name=".utils.AlarmReceiver">
             <intent-filter>
                 <action android:name=".controllers.activities.NotificationActivity" />

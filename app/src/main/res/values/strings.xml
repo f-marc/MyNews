@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">MyNews</string>
 
+    <string name="searchButton">SEARCH</string>
+
     <!-- Used in Toolbar -->
     <string name="search">Search</string>
     <string name="param">Parameters</string>

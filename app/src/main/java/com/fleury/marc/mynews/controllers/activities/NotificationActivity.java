@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.fleury.marc.mynews.R;
 import com.fleury.marc.mynews.utils.AlarmReceiver;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,19 +38,18 @@ public class NotificationActivity extends AppCompatActivity {
 
     @BindView(R.id.activity_notification_edit_text) EditText mEditText;
     @BindView(R.id.activity_notification_switch) Switch mSwitch;
-    @BindView(R.id.check_arts) CheckBox check_arts;
-    @BindView(R.id.check_books) CheckBox check_books;
-    @BindView(R.id.check_business) CheckBox check_business;
-    @BindView(R.id.check_politics) CheckBox check_politics;
-    @BindView(R.id.check_science) CheckBox check_science;
-    @BindView(R.id.check_sports) CheckBox check_sports;
-    @BindView(R.id.check_tech) CheckBox check_tech;
-    @BindView(R.id.check_travel) CheckBox check_travel;
+    @BindView(R.id.notif_check_arts) CheckBox check_arts;
+    @BindView(R.id.notif_check_books) CheckBox check_books;
+    @BindView(R.id.notif_check_business) CheckBox check_business;
+    @BindView(R.id.notif_check_politics) CheckBox check_politics;
+    @BindView(R.id.notif_check_science) CheckBox check_science;
+    @BindView(R.id.notif_check_sports) CheckBox check_sports;
+    @BindView(R.id.notif_check_tech) CheckBox check_tech;
+    @BindView(R.id.notif_check_travel) CheckBox check_travel;
 
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
     private SharedPreferences mPreferences;
-    private Map<Integer, String> mList = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +59,13 @@ public class NotificationActivity extends AppCompatActivity {
 
         mPreferences = this.getSharedPreferences("pref", MODE_PRIVATE);
 
-        setSwitch();
-
         updateEditText();
         updateCheckBox();
         updateSwitch();
 
         configureToolbar();
+
+        setSwitch();
     }
 
     private void configureToolbar() {
@@ -88,6 +88,7 @@ public class NotificationActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                mPreferences.edit().putString("keyWord", mEditText.getText().toString()).apply();
                 setSwitch();
             }
         });
@@ -107,11 +108,9 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.put(0, "arts");
                     mPreferences.edit().putBoolean("checkArts", true).apply();
                     mSwitch.setChecked(false);
                 } else {
-                    mList.remove(0);
                     mPreferences.edit().putBoolean("checkArts", false).apply();
                 }
                 setSwitch();
@@ -122,11 +121,9 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.put(1, "books");
                     mPreferences.edit().putBoolean("checkBooks", true).apply();
                     mSwitch.setChecked(false);
                 } else {
-                    mList.remove(1);
                     mPreferences.edit().putBoolean("checkBooks", false).apply();
                 }
                 setSwitch();
@@ -137,11 +134,9 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.put(2, "business");
                     mPreferences.edit().putBoolean("checkBusiness", true).apply();
                     mSwitch.setChecked(false);
                 } else {
-                    mList.remove(2);
                     mPreferences.edit().putBoolean("checkBusiness", false).apply();
                 }
                 setSwitch();
@@ -152,11 +147,9 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.put(3, "politics");
                     mPreferences.edit().putBoolean("checkPolitics", true).apply();
                     mSwitch.setChecked(false);
                 } else {
-                    mList.remove(3);
                     mPreferences.edit().putBoolean("checkPolitics", false).apply();
                 }
                 setSwitch();
@@ -167,11 +160,9 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.put(4, "science");
                     mPreferences.edit().putBoolean("checkScience", true).apply();
                     mSwitch.setChecked(false);
                 } else {
-                    mList.remove(4);
                     mPreferences.edit().putBoolean("checkScience", false).apply();
                 }
                 setSwitch();
@@ -182,11 +173,9 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.put(5, "sports");
                     mPreferences.edit().putBoolean("checkSports", true).apply();
                     mSwitch.setChecked(false);
                 } else {
-                    mList.remove(5);
                     mPreferences.edit().putBoolean("checkSports", false).apply();
                 }
                 setSwitch();
@@ -197,11 +186,9 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.put(6, "tech");
                     mPreferences.edit().putBoolean("checkTech", true).apply();
                     mSwitch.setChecked(false);
                 } else {
-                    mList.remove(6);
                     mPreferences.edit().putBoolean("checkTech", false).apply();
                 }
                 setSwitch();
@@ -212,18 +199,15 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.put(7, "travel");
                     mPreferences.edit().putBoolean("checkTravel", true).apply();
                     mSwitch.setChecked(false);
                 } else {
-                    mList.remove(7);
                     mPreferences.edit().putBoolean("checkTravel", false).apply();
                 }
                 setSwitch();
             }
         });
     }
-
 
     private void updateSwitch() {
         mSwitch.setChecked(mPreferences.getBoolean("switchCheck", false));
@@ -232,9 +216,6 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    String mText = mEditText.getText().toString();
-                    mPreferences.edit().putString("keyWord", mText).apply();
-
                     alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
                     Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
                     alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
@@ -271,7 +252,14 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     public void setSwitch() {
-        if (!mList.isEmpty() && !mEditText.getText().toString().matches("")) {
+        if ((mPreferences.getBoolean("checkArts", false) ||
+                mPreferences.getBoolean("checkBooks", false) ||
+                mPreferences.getBoolean("checkBusiness", false) ||
+                mPreferences.getBoolean("checkPolitics", false) ||
+                mPreferences.getBoolean("checkScience", false) ||
+                mPreferences.getBoolean("checkSports", false) ||
+                mPreferences.getBoolean("checkTech", false) ||
+                mPreferences.getBoolean("checkTravel", false)) && !mEditText.getText().toString().matches("")) {
             mSwitch.setEnabled(true);
         } else if (mSwitch.isChecked()) {
             mSwitch.setEnabled(true);
