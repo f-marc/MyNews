@@ -2,6 +2,7 @@ package com.fleury.marc.mynews.utils;
 
 
 import com.fleury.marc.mynews.models.popular.NYTimesResponse;
+import com.fleury.marc.mynews.models.search.SearchResponse;
 
 import java.util.concurrent.TimeUnit;
 
@@ -44,12 +45,12 @@ public class NYTimesStreams {
                 .timeout(10, TimeUnit.SECONDS);
     }
 
-    /*public static Observable<NYTimesResponse> streamFetchArticleSearch(String key, String category){
+    public static Observable<SearchResponse> streamFetchArticleSearch(String section, String key){
         NYTimesService nyTimesService = NYTimesService.retrofit.create(NYTimesService.class);
-        return nyTimesService.getSearch(key, category)
+        return nyTimesService.getSearch(section, key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);
-    }*/
+    }
 
 }

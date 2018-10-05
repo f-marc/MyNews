@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -22,6 +24,8 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.fleury.marc.mynews.R;
+import com.fleury.marc.mynews.controllers.fragments.others.CategoryFragment;
+import com.fleury.marc.mynews.controllers.fragments.others.ResultFragment;
 import com.fleury.marc.mynews.utils.AlarmReceiver;
 
 import java.util.ArrayList;
@@ -37,6 +41,7 @@ public class SearchActivity extends AppCompatActivity {
     private android.support.v7.widget.Toolbar toolbar;
 
     @BindView(R.id.activity_search_edit_text) EditText mEditText;
+    @BindView(R.id.activity_search_button) Button mButton;
     @BindView(R.id.search_check_arts) CheckBox check_arts;
     @BindView(R.id.search_check_books) CheckBox check_books;
     @BindView(R.id.search_check_business) CheckBox check_business;
@@ -57,6 +62,7 @@ public class SearchActivity extends AppCompatActivity {
         updateCheckBox();
 
         configureToolbar();
+
     }
 
     private void configureToolbar() {
@@ -77,6 +83,7 @@ public class SearchActivity extends AppCompatActivity {
                 } else {
                     mList.remove("Arts");
                 }
+                setButton();
             }
         });
 
@@ -88,6 +95,7 @@ public class SearchActivity extends AppCompatActivity {
                 } else {
                     mList.remove("Books");
                 }
+                setButton();
             }
         });
 
@@ -99,6 +107,7 @@ public class SearchActivity extends AppCompatActivity {
                 } else {
                     mList.remove("Business Day");
                 }
+                setButton();
             }
         });
 
@@ -110,6 +119,7 @@ public class SearchActivity extends AppCompatActivity {
                 } else {
                     mList.remove("Politics");
                 }
+                setButton();
             }
         });
 
@@ -121,6 +131,7 @@ public class SearchActivity extends AppCompatActivity {
                 } else {
                     mList.remove("Science");
                 }
+                setButton();
             }
         });
 
@@ -132,6 +143,7 @@ public class SearchActivity extends AppCompatActivity {
                 } else {
                     mList.remove("Sports");
                 }
+                setButton();
             }
         });
 
@@ -143,6 +155,7 @@ public class SearchActivity extends AppCompatActivity {
                 } else {
                     mList.remove("Technology");
                 }
+                setButton();
             }
         });
 
@@ -154,8 +167,17 @@ public class SearchActivity extends AppCompatActivity {
                 } else {
                     mList.remove("Travel");
                 }
+                setButton();
             }
         });
     }
 
+    public void setButton() {
+        if (!mList.isEmpty() && !mEditText.getText().toString().matches("")) {
+            mButton.setEnabled(true);
+        } else {
+            mButton.setEnabled(false);
+        }
+    }
 }
+

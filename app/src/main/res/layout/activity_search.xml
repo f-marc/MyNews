@@ -31,6 +31,10 @@
             app:backgroundTint="@color/colorPrimary"
             android:textCursorDrawable="@drawable/color_cursor"/>
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <!-- CheckBox -->
         <LinearLayout
             android:layout_width="match_parent"

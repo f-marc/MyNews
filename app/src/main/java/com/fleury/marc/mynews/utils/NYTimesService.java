@@ -2,6 +2,7 @@ package com.fleury.marc.mynews.utils;
 
 
 import com.fleury.marc.mynews.models.popular.NYTimesResponse;
+import com.fleury.marc.mynews.models.search.SearchResponse;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
@@ -26,8 +27,8 @@ public interface NYTimesService {
     @GET("mostpopular/v2/mostviewed/{section}/1.json")
     Observable<NYTimesResponse> getSection(@Path("section") String section, @Query("api-key") String key);
 
-    /*@GET("search/v2/articlesearch.json")
-    Observable<NYTimesResponse> getSearch(@Query("api-key") String key, @Query("facet_field") String category);*/
+    @GET("search/v2/articlesearch.json")
+    Observable<SearchResponse> getSearch(@Query("news_desk") String section, @Query("api-key") String key);
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")

@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.bumptech.glide.RequestManager;
 import com.fleury.marc.mynews.R;
 import com.fleury.marc.mynews.models.popular.Result;
+import com.fleury.marc.mynews.models.search.Doc;
+import com.fleury.marc.mynews.models.search.Response;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,5 +41,13 @@ public class NYTimesViewHolder extends RecyclerView.ViewHolder {
         this.textViewCategory.setText(result.getSection());
         this.textViewDate.setText(result.getPublishedDate().replace("-", "/"));
         //glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
+    }
+
+    public void updateWithSearch(Doc result, RequestManager glide){
+        // Update TextView & ImageView
+        this.textView.setText(result.getHeadline().getMain());
+        //this.textViewCategory.setText(result.getSection());
+        this.textViewDate.setText(result.getPubDate());
+        glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
     }
 }
