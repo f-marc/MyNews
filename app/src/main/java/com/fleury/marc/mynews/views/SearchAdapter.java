@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.RequestManager;
 import com.fleury.marc.mynews.R;
-import com.fleury.marc.mynews.models.popular.Result;
 import com.fleury.marc.mynews.models.search.Doc;
-import com.fleury.marc.mynews.models.search.Response;
 
 import java.util.List;
 

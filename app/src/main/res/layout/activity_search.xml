@@ -28,12 +28,61 @@
             android:layout_height="wrap_content"
             android:hint="@string/notification_editText_hint"
             android:textColorHint="@color/thirdColor"
-            app:backgroundTint="@color/colorPrimary"
-            android:textCursorDrawable="@drawable/color_cursor"/>
+            android:textCursorDrawable="@drawable/color_cursor"
+            app:backgroundTint="@color/colorPrimary" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingEnd="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/beginDate"
+                    android:textColor="@color/thirdColor" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/beginDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    app:backgroundTint="@color/thirdColor"
+                    android:drawableEnd="@drawable/baseline_arrow_drop_down_black_24" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/endDate"
+                    android:textColor="@color/thirdColor"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/endDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textIsSelectable="true"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    app:backgroundTint="@color/thirdColor"
+                    android:drawableEnd="@drawable/baseline_arrow_drop_down_black_24" />
+            </LinearLayout>
+
+        </LinearLayout>
 
         <!-- CheckBox -->
         <LinearLayout
@@ -128,7 +177,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/searchButton"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 

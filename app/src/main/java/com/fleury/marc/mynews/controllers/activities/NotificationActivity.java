@@ -64,8 +64,6 @@ public class NotificationActivity extends AppCompatActivity {
         updateSwitch();
 
         configureToolbar();
-
-        setSwitch();
     }
 
     private void configureToolbar() {
@@ -89,7 +87,6 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 mPreferences.edit().putString("keyWord", mEditText.getText().toString()).apply();
-                setSwitch();
             }
         });
     }
@@ -113,7 +110,6 @@ public class NotificationActivity extends AppCompatActivity {
                 } else {
                     mPreferences.edit().putBoolean("checkArts", false).apply();
                 }
-                setSwitch();
             }
         });
 
@@ -126,7 +122,6 @@ public class NotificationActivity extends AppCompatActivity {
                 } else {
                     mPreferences.edit().putBoolean("checkBooks", false).apply();
                 }
-                setSwitch();
             }
         });
 
@@ -139,7 +134,6 @@ public class NotificationActivity extends AppCompatActivity {
                 } else {
                     mPreferences.edit().putBoolean("checkBusiness", false).apply();
                 }
-                setSwitch();
             }
         });
 
@@ -152,7 +146,6 @@ public class NotificationActivity extends AppCompatActivity {
                 } else {
                     mPreferences.edit().putBoolean("checkPolitics", false).apply();
                 }
-                setSwitch();
             }
         });
 
@@ -165,7 +158,6 @@ public class NotificationActivity extends AppCompatActivity {
                 } else {
                     mPreferences.edit().putBoolean("checkScience", false).apply();
                 }
-                setSwitch();
             }
         });
 
@@ -178,7 +170,6 @@ public class NotificationActivity extends AppCompatActivity {
                 } else {
                     mPreferences.edit().putBoolean("checkSports", false).apply();
                 }
-                setSwitch();
             }
         });
 
@@ -191,7 +182,6 @@ public class NotificationActivity extends AppCompatActivity {
                 } else {
                     mPreferences.edit().putBoolean("checkTech", false).apply();
                 }
-                setSwitch();
             }
         });
 
@@ -204,7 +194,6 @@ public class NotificationActivity extends AppCompatActivity {
                 } else {
                     mPreferences.edit().putBoolean("checkTravel", false).apply();
                 }
-                setSwitch();
             }
         });
     }
@@ -216,20 +205,32 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-                    Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-                    alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
-                    // Set the alarm to start at 11:59 p.m.
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(System.currentTimeMillis());
-                    calendar.set(Calendar.HOUR_OF_DAY, 23);
-                    calendar.set(Calendar.MINUTE, 59);
-                    // Set the alarm to repeat everyday
-                    alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+                    if ((mPreferences.getBoolean("checkArts", false) ||
+                            mPreferences.getBoolean("checkBooks", false) ||
+                            mPreferences.getBoolean("checkBusiness", false) ||
+                            mPreferences.getBoolean("checkPolitics", false) ||
+                            mPreferences.getBoolean("checkScience", false) ||
+                            mPreferences.getBoolean("checkSports", false) ||
+                            mPreferences.getBoolean("checkTech", false) ||
+                            mPreferences.getBoolean("checkTravel", false)) && !mEditText.getText().toString().matches("")) {
+                        alarmMgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+                        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+                        // Set the alarm to start at 11:59 p.m.
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(System.currentTimeMillis());
+                        calendar.set(Calendar.HOUR_OF_DAY, 23);
+                        calendar.set(Calendar.MINUTE, 59);
+                        // Set the alarm to repeat everyday
+                        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
 
-                    mPreferences.edit().putBoolean("switchCheck", true).apply();
+                        mPreferences.edit().putBoolean("switchCheck", true).apply();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "You must define at least one keyword and one category", Toast.LENGTH_LONG).show();
+                        mSwitch.setChecked(false);
+                    }
                 } else {
-                    alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+                    alarmMgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
                     Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
                     alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
                     alarmMgr.cancel(alarmIntent);
@@ -249,22 +250,5 @@ public class NotificationActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    public void setSwitch() {
-        if ((mPreferences.getBoolean("checkArts", false) ||
-                mPreferences.getBoolean("checkBooks", false) ||
-                mPreferences.getBoolean("checkBusiness", false) ||
-                mPreferences.getBoolean("checkPolitics", false) ||
-                mPreferences.getBoolean("checkScience", false) ||
-                mPreferences.getBoolean("checkSports", false) ||
-                mPreferences.getBoolean("checkTech", false) ||
-                mPreferences.getBoolean("checkTravel", false)) && !mEditText.getText().toString().matches("")) {
-            mSwitch.setEnabled(true);
-        } else if (mSwitch.isChecked()) {
-            mSwitch.setEnabled(true);
-        } else {
-            mSwitch.setEnabled(false);
-        }
     }
 }

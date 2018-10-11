@@ -2,6 +2,8 @@
     <string name="app_name">MyNews</string>
 
     <string name="searchButton">SEARCH</string>
+    <string name="beginDate">Begin Date</string>
+    <string name="endDate">End Date</string>
 
     <!-- Used in Toolbar -->
     <string name="search">Search</string>

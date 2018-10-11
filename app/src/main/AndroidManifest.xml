@@ -25,26 +25,27 @@
         <!-- CategoryActivity -->
         <activity
             android:name=".controllers.activities.CategoryActivity"
-            android:parentActivityName=".controllers.activities.MainActivity">
-        </activity>
+            android:parentActivityName=".controllers.activities.MainActivity" />
 
         <!-- WebViewActivity -->
         <activity
             android:name=".controllers.activities.WebViewActivity"
-            android:parentActivityName=".controllers.activities.MainActivity">
-        </activity>
+            android:parentActivityName=".controllers.activities.MainActivity" />
 
         <!-- NotificationActivity -->
         <activity
             android:name=".controllers.activities.NotificationActivity"
-            android:parentActivityName=".controllers.activities.MainActivity">
-        </activity>
+            android:parentActivityName=".controllers.activities.MainActivity" />
 
         <!-- SearchActivity -->
         <activity
             android:name=".controllers.activities.SearchActivity"
-            android:parentActivityName=".controllers.activities.MainActivity">
-        </activity>
+            android:parentActivityName=".controllers.activities.MainActivity" />
+
+        <!-- SearchResultActivity -->
+        <activity
+            android:name=".controllers.activities.SearchResultActivity"
+            android:parentActivityName=".controllers.activities.SearchActivity" />
 
         <!-- AlarmReceiver -->
         <receiver android:name=".utils.AlarmReceiver">

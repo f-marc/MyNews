@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.fleury.marc.mynews.R;
 import com.fleury.marc.mynews.controllers.activities.WebViewActivity;
+import com.fleury.marc.mynews.models.stories.StoriesResponse;
+import com.fleury.marc.mynews.models.stories.StoriesResult;
 import com.fleury.marc.mynews.utils.ItemClickSupport;
 import com.fleury.marc.mynews.utils.NYTimesStreams;
 import com.fleury.marc.mynews.views.StoriesAdapter;
@@ -31,7 +33,7 @@ public class StoriesPageFragment extends Fragment {
     @BindView(R.id.fragment_main_swipe_container) SwipeRefreshLayout swipeRefreshLayout;
 
     private Disposable disposable;
-    private List<com.fleury.marc.mynews.models.stories.Result> nyTimesResponse;
+    private List<StoriesResult> nyTimesResponse;
     private StoriesAdapter adapter;
 
     public final static String key = "061416d2a6f642c9b295500c8eadd4e3";
@@ -69,7 +71,7 @@ public class StoriesPageFragment extends Fragment {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         // Get article from adapter
-                        com.fleury.marc.mynews.models.stories.Result article = adapter.getArticle(position);
+                        StoriesResult article = adapter.getArticle(position);
                         // Open the WebView in a new Activity
                         Intent webViewActivityIntent = new Intent(getContext(), WebViewActivity.class);
                         webViewActivityIntent.putExtra(KEY_URL, article.getUrl());
@@ -109,9 +111,9 @@ public class StoriesPageFragment extends Fragment {
     // -------------------
 
     private void executeHttpRequestWithRetrofit(){
-        this.disposable = NYTimesStreams.streamFetchArticleStories(key).subscribeWith(new DisposableObserver<com.fleury.marc.mynews.models.stories.NYTimesResponse>() {
+        this.disposable = NYTimesStreams.streamFetchArticleStories(key).subscribeWith(new DisposableObserver<StoriesResponse>() {
             @Override
-            public void onNext(com.fleury.marc.mynews.models.stories.NYTimesResponse response) {
+            public void onNext(StoriesResponse response) {
                 // Update RecyclerView after getting results from API
                 updateUI(response.getResults());
             }
@@ -132,7 +134,7 @@ public class StoriesPageFragment extends Fragment {
     // UPDATE UI
     // -------------------
 
-    private void updateUI(List<com.fleury.marc.mynews.models.stories.Result> articles){
+    private void updateUI(List<StoriesResult> articles){
         // Stop refreshing and clear actual list of articles
         swipeRefreshLayout.setRefreshing(false);
         nyTimesResponse.clear();

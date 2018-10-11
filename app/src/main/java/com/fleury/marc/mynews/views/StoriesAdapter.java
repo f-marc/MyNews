@@ -9,19 +9,20 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.RequestManager;
 import com.fleury.marc.mynews.R;
+import com.fleury.marc.mynews.models.stories.StoriesResult;
 
 import java.util.List;
 
 public class StoriesAdapter extends RecyclerView.Adapter<NYTimesViewHolder> {
 
     // FOR DATA
-    private List<com.fleury.marc.mynews.models.stories.Result> newsList;
+    private List<StoriesResult> newsList;
 
     // 1 - Declaring a Glide object
     private RequestManager glide;
 
     // 2 - Updating our constructor adding a Glide Object
-    public StoriesAdapter(List<com.fleury.marc.mynews.models.stories.Result> newsList, RequestManager glide) {
+    public StoriesAdapter(List<StoriesResult> newsList, RequestManager glide) {
         this.newsList = newsList;
         this.glide = glide;
     }
@@ -49,7 +50,7 @@ public class StoriesAdapter extends RecyclerView.Adapter<NYTimesViewHolder> {
         return this.newsList.size();
     }
 
-    public com.fleury.marc.mynews.models.stories.Result getArticle(int position){
+    public StoriesResult getArticle(int position){
         return this.newsList.get(position);
     }
 }

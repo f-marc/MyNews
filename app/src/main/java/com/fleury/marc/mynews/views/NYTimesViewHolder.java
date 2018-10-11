@@ -8,9 +8,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.fleury.marc.mynews.R;
-import com.fleury.marc.mynews.models.popular.Result;
+import com.fleury.marc.mynews.models.popular.Medium;
+import com.fleury.marc.mynews.models.popular.PopularResult;
 import com.fleury.marc.mynews.models.search.Doc;
-import com.fleury.marc.mynews.models.search.Response;
+import com.fleury.marc.mynews.models.stories.StoriesResult;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,20 +30,28 @@ public class NYTimesViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithPopular(Result result, RequestManager glide){
+    public void updateWithPopular(PopularResult result, RequestManager glide){
         // Update TextView & ImageView
         this.textView.setText(result.getTitle());
         this.textViewCategory.setText(result.getSection());
         this.textViewDate.setText(result.getPublishedDate().replace("-", "/"));
+        /*if(result.getMedia() instanceof String) {
+        } else {
+            List<Medium> mediums = (List<Medium>) result.getMedia();
+            glide.load(mediums.get(0).getMediaMetadata().get(0).getUrl()).into(imageView);
+        }*/
         glide.load(result.getMedia().get(0).getMediaMetadata().get(0).getUrl()).into(imageView);
+
     }
 
-    public void updateWithStories(com.fleury.marc.mynews.models.stories.Result result, RequestManager glide){
+    public void updateWithStories(StoriesResult result, RequestManager glide){
         // Update TextView & ImageView
         this.textView.setText(result.getTitle());
         this.textViewCategory.setText(result.getSection());
-        this.textViewDate.setText(result.getPublishedDate().replace("-", "/"));
-        //glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
+        String mDate = result.getPublishedDate();
+        String subDate = mDate.substring(0, mDate.indexOf("T"));
+        this.textViewDate.setText(subDate.replace("-", "/"));
+        glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
     }
 
     public void updateWithSearch(Doc result, RequestManager glide){
@@ -48,6 +59,6 @@ public class NYTimesViewHolder extends RecyclerView.ViewHolder {
         this.textView.setText(result.getHeadline().getMain());
         //this.textViewCategory.setText(result.getSection());
         this.textViewDate.setText(result.getPubDate());
-        glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
+        //glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
     }
 }

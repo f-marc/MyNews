@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import com.fleury.marc.mynews.R;
 import com.fleury.marc.mynews.controllers.fragments.others.CategoryFragment;
 
+import static com.fleury.marc.mynews.controllers.activities.MainActivity.KEY_CATEGORY;
+
 public class CategoryActivity extends AppCompatActivity {
 
     public final static String KEY_CATEGORY_TWO = "KEY_CATEGORY_TWO";
@@ -18,7 +20,7 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
 
         Bundle mExtra = getIntent().getExtras();
-        int mKey = mExtra.getInt("KEY_CATEGORY");
+        int mKey = mExtra.getInt(KEY_CATEGORY);
 
         configureToolbar();
         runFragment(mKey);

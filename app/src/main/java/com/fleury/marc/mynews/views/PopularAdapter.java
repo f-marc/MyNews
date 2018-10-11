@@ -9,20 +9,20 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.RequestManager;
 import com.fleury.marc.mynews.R;
-import com.fleury.marc.mynews.models.popular.Result;
+import com.fleury.marc.mynews.models.popular.PopularResult;
 
 import java.util.List;
 
 public class PopularAdapter extends RecyclerView.Adapter<NYTimesViewHolder> {
 
     // FOR DATA
-    private List<Result> newsList;
+    private List<PopularResult> newsList;
 
     // 1 - Declaring a Glide object
     private RequestManager glide;
 
     // 2 - Updating our constructor adding a Glide Object
-    public PopularAdapter(List<Result> newsList, RequestManager glide) {
+    public PopularAdapter(List<PopularResult> newsList, RequestManager glide) {
         this.newsList = newsList;
         this.glide = glide;
     }
@@ -50,7 +50,7 @@ public class PopularAdapter extends RecyclerView.Adapter<NYTimesViewHolder> {
         return this.newsList.size();
     }
 
-    public Result getArticle(int position){
+    public PopularResult getArticle(int position){
         return this.newsList.get(position);
     }
 }

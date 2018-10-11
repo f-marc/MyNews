@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.fleury.marc.mynews.R;
 import com.fleury.marc.mynews.controllers.activities.WebViewActivity;
-import com.fleury.marc.mynews.models.popular.NYTimesResponse;
-import com.fleury.marc.mynews.models.popular.Result;
+import com.fleury.marc.mynews.models.popular.PopularResponse;
+import com.fleury.marc.mynews.models.popular.PopularResult;
 import com.fleury.marc.mynews.utils.ItemClickSupport;
 import com.fleury.marc.mynews.utils.NYTimesStreams;
 import com.fleury.marc.mynews.views.PopularAdapter;
@@ -33,7 +33,7 @@ public class MainFragment extends Fragment {
     @BindView(R.id.fragment_main_swipe_container) SwipeRefreshLayout swipeRefreshLayout;
 
     private Disposable disposable;
-    private List<Result> nyTimesResponse;
+    private List<PopularResult> nyTimesResponse;
     private PopularAdapter adapter;
 
     public final static String key = "061416d2a6f642c9b295500c8eadd4e3";
@@ -71,7 +71,7 @@ public class MainFragment extends Fragment {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         // Get article from adapter
-                        Result article = adapter.getArticle(position);
+                        PopularResult article = adapter.getArticle(position);
                         // Open the WebView in a new Activity
                         Intent webViewActivityIntent = new Intent(getContext(), WebViewActivity.class);
                         webViewActivityIntent.putExtra(KEY_URL, article.getUrl());
@@ -111,9 +111,9 @@ public class MainFragment extends Fragment {
     // -------------------
 
     private void executeHttpRequestWithRetrofit(){
-        this.disposable = NYTimesStreams.streamFetchArticlePopular(key).subscribeWith(new DisposableObserver<NYTimesResponse>() {
+        this.disposable = NYTimesStreams.streamFetchArticlePopular(key).subscribeWith(new DisposableObserver<PopularResponse>() {
             @Override
-            public void onNext(NYTimesResponse response) {
+            public void onNext(PopularResponse response) {
                 // Update RecyclerView after getting results from API
                 updateUI(response.getResults());
             }
@@ -134,7 +134,7 @@ public class MainFragment extends Fragment {
     // UPDATE UI
     // -------------------
 
-    private void updateUI(List<Result> articles){
+    private void updateUI(List<PopularResult> articles){
         // Stop refreshing and clear actual list of articles
         swipeRefreshLayout.setRefreshing(false);
         nyTimesResponse.clear();

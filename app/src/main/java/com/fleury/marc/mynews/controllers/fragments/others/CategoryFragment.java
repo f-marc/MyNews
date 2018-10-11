@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.fleury.marc.mynews.R;
 import com.fleury.marc.mynews.controllers.activities.WebViewActivity;
-import com.fleury.marc.mynews.models.popular.NYTimesResponse;
-import com.fleury.marc.mynews.models.popular.Result;
+import com.fleury.marc.mynews.models.popular.PopularResponse;
+import com.fleury.marc.mynews.models.popular.PopularResult;
 import com.fleury.marc.mynews.utils.ItemClickSupport;
 import com.fleury.marc.mynews.utils.NYTimesStreams;
 import com.fleury.marc.mynews.views.PopularAdapter;
@@ -29,6 +29,8 @@ import butterknife.ButterKnife;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
+import static com.fleury.marc.mynews.controllers.activities.CategoryActivity.KEY_CATEGORY_TWO;
+
 
 public class CategoryFragment extends Fragment {
 
@@ -39,7 +41,7 @@ public class CategoryFragment extends Fragment {
 
     //FOR DATA
     private Disposable disposable;
-    private List<Result> nyTimesResponse;
+    private List<PopularResult> nyTimesResponse;
     private PopularAdapter adapter;
 
     public final static String key = "061416d2a6f642c9b295500c8eadd4e3";
@@ -61,7 +63,7 @@ public class CategoryFragment extends Fragment {
         ButterKnife.bind(this, v);
 
         Bundle bundle = getArguments();
-        mKey = bundle.getInt("KEY_CATEGORY_TWO");
+        mKey = bundle.getInt(KEY_CATEGORY_TWO);
         Log.i("TEST_KEY", String.valueOf(mKey));
 
         this.configureRecyclerView(); // Call during UI creation
@@ -89,7 +91,7 @@ public class CategoryFragment extends Fragment {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         // Get article from adapter
-                        Result article = adapter.getArticle(position);
+                        PopularResult article = adapter.getArticle(position);
                         // Open the WebView in a new Activity
                         Intent webViewActivityIntent = new Intent(getContext(), WebViewActivity.class);
                         webViewActivityIntent.putExtra(KEY_URL, article.getUrl());
@@ -158,10 +160,10 @@ public class CategoryFragment extends Fragment {
                 break;
         }
 
-        this.disposable = NYTimesStreams.streamFetchArticleSection(section, key).subscribeWith(new DisposableObserver<NYTimesResponse>() {
+        this.disposable = NYTimesStreams.streamFetchArticleSection(section, key).subscribeWith(new DisposableObserver<PopularResponse>() {
 
             @Override
-            public void onNext(NYTimesResponse response) {
+            public void onNext(PopularResponse response) {
                 // Update RecyclerView after getting results from API
                 updateUI(response.getResults());
             }
@@ -184,7 +186,7 @@ public class CategoryFragment extends Fragment {
     // UPDATE UI
     // -------------------
 
-    private void updateUI(List<Result> articles) {
+    private void updateUI(List<PopularResult> articles) {
         // Stop refreshing and clear actual list of articles
         swipeRefreshLayout.setRefreshing(false);
         nyTimesResponse.clear();
