@@ -28,7 +28,6 @@ public class WebViewActivity extends AppCompatActivity {
         configureToolbar();
 
         mWebView.setWebViewClient(new WebViewClient());
-        mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setUseWideViewPort(true);
         mWebView.loadUrl(mKey);
     }

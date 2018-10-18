@@ -17,7 +17,7 @@ import com.fleury.marc.mynews.models.stories.StoriesResponse;
 import com.fleury.marc.mynews.models.stories.StoriesResult;
 import com.fleury.marc.mynews.utils.ItemClickSupport;
 import com.fleury.marc.mynews.utils.NYTimesStreams;
-import com.fleury.marc.mynews.views.StoriesAdapter;
+import com.fleury.marc.mynews.adapters.StoriesAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

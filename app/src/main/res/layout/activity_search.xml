@@ -48,14 +48,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/beginDate"
-                    android:textColor="@color/thirdColor" />
+                    android:textColor="@color/secondaryColor" />
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/beginDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:hint="@string/dateHint"
+                    android:textColorHint="@color/thirdColor"
                     android:textCursorDrawable="@drawable/color_cursor"
-                    app:backgroundTint="@color/thirdColor"
+                    app:backgroundTint="@color/secondaryColor"
                     android:drawableEnd="@drawable/baseline_arrow_drop_down_black_24" />
             </LinearLayout>
 
@@ -70,15 +73,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/endDate"
-                    android:textColor="@color/thirdColor"/>
+                    android:textColor="@color/secondaryColor"/>
 
-                <android.support.v7.widget.AppCompatTextView
+                <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/endDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textIsSelectable="true"
+                    android:inputType="date"
+                    android:hint="@string/dateHint"
+                    android:textColorHint="@color/thirdColor"
                     android:textCursorDrawable="@drawable/color_cursor"
-                    app:backgroundTint="@color/thirdColor"
+                    app:backgroundTint="@color/secondaryColor"
                     android:drawableEnd="@drawable/baseline_arrow_drop_down_black_24" />
             </LinearLayout>
 

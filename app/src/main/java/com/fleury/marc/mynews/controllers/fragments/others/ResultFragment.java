@@ -17,7 +17,7 @@ import com.fleury.marc.mynews.models.search.Doc;
 import com.fleury.marc.mynews.models.search.SearchResponse;
 import com.fleury.marc.mynews.utils.ItemClickSupport;
 import com.fleury.marc.mynews.utils.NYTimesStreams;
-import com.fleury.marc.mynews.views.SearchAdapter;
+import com.fleury.marc.mynews.adapters.SearchAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

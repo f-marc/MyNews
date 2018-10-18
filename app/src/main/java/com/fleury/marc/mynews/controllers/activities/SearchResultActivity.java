@@ -48,5 +48,4 @@ public class SearchResultActivity extends AppCompatActivity {
         mFrag.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_search_result_frame_layout, mFrag).commit();
     }
-
 }

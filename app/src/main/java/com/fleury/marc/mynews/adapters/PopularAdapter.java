@@ -1,4 +1,4 @@
-package com.fleury.marc.mynews.views;
+package com.fleury.marc.mynews.adapters;
 
 
 import android.content.Context;
@@ -9,20 +9,21 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.RequestManager;
 import com.fleury.marc.mynews.R;
-import com.fleury.marc.mynews.models.search.Doc;
+import com.fleury.marc.mynews.models.popular.PopularResult;
+import com.fleury.marc.mynews.views.NYTimesViewHolder;
 
 import java.util.List;
 
-public class SearchAdapter extends RecyclerView.Adapter<NYTimesViewHolder> {
+public class PopularAdapter extends RecyclerView.Adapter<NYTimesViewHolder> {
 
     // FOR DATA
-    private List<Doc> newsList;
+    private List<PopularResult> newsList;
 
     // 1 - Declaring a Glide object
     private RequestManager glide;
 
     // 2 - Updating our constructor adding a Glide Object
-    public SearchAdapter(List<Doc> newsList, RequestManager glide) {
+    public PopularAdapter(List<PopularResult> newsList, RequestManager glide) {
         this.newsList = newsList;
         this.glide = glide;
     }
@@ -41,7 +42,7 @@ public class SearchAdapter extends RecyclerView.Adapter<NYTimesViewHolder> {
     @Override
     public void onBindViewHolder(NYTimesViewHolder viewHolder, int position) {
         // Passing the Glide object to each ViewHolder
-        viewHolder.updateWithSearch(this.newsList.get(position), this.glide);
+        viewHolder.updateWithPopular(this.newsList.get(position), this.glide);
     }
 
     // RETURN THE TOTAL COUNT OF ITEMS IN THE LIST
@@ -50,7 +51,7 @@ public class SearchAdapter extends RecyclerView.Adapter<NYTimesViewHolder> {
         return this.newsList.size();
     }
 
-    public Doc getArticle(int position){
+    public PopularResult getArticle(int position){
         return this.newsList.get(position);
     }
 }

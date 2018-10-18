@@ -51,7 +51,7 @@ public class NYTimesViewHolder extends RecyclerView.ViewHolder {
         String mDate = result.getPublishedDate();
         String subDate = mDate.substring(0, mDate.indexOf("T"));
         this.textViewDate.setText(subDate.replace("-", "/"));
-        glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
+        //glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
     }
 
     public void updateWithSearch(Doc result, RequestManager glide){

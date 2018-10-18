@@ -47,6 +47,16 @@
             android:name=".controllers.activities.SearchResultActivity"
             android:parentActivityName=".controllers.activities.SearchActivity" />
 
+        <!-- HelpActivity -->
+        <activity
+            android:name=".controllers.activities.HelpActivity"
+            android:parentActivityName=".controllers.activities.MainActivity" />
+
+        <!-- AboutActivity -->
+        <activity
+            android:name=".controllers.activities.AboutActivity"
+            android:parentActivityName=".controllers.activities.MainActivity" />
+
         <!-- AlarmReceiver -->
         <receiver android:name=".utils.AlarmReceiver">
             <intent-filter>

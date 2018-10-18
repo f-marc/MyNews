@@ -35,6 +35,7 @@ import com.fleury.marc.mynews.utils.AlarmReceiver;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -57,13 +58,9 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.search_check_tech) CheckBox check_tech;
     @BindView(R.id.search_check_travel) CheckBox check_travel;
     @BindView(R.id.beginDate) EditText beginDate;
-    @BindView(R.id.endDate) TextView endDate;
+    @BindView(R.id.endDate) EditText endDate;
 
     private ArrayList<String> mList = new ArrayList<>();
-    private SimpleDateFormat dateFormat;
-    private DatePickerDialog beginDatePicker;
-    private DatePickerDialog endDatePicker;
-    private Calendar newCalendar;
 
     public final static String KEY_CATEGORY_LIST = "KEY_CATEGORY_LIST";
     public final static String KEY_KEYWORD = "KEY_KEYWORD";
@@ -74,14 +71,19 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
-        newCalendar = Calendar.getInstance();
-        dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        /*String test = "22/08/1966";
+        SimpleDateFormat formatEditText = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        Date d1 = formatEditText.parse(test);
+        SimpleDateFormat formatAPI = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+        String sCertDate = formatAPI.format(d1);*/
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!mList.isEmpty() && !mEditText.getText().toString().matches("")){
                     String mListString = TextUtils.join(", ", mList);
+                    Log.i("List", mListString);
+                    Log.i("Keyword", mEditText.getText().toString());
                     Intent searchResultActivityIntent = new Intent(SearchActivity.this, SearchResultActivity.class);
                     searchResultActivityIntent.putExtra(KEY_CATEGORY_LIST, mListString);
                     searchResultActivityIntent.putExtra(KEY_KEYWORD, mEditText.getText().toString());
@@ -94,8 +96,6 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         updateCheckBox();
-        updateDate();
-
         configureToolbar();
     }
 
@@ -194,40 +194,6 @@ public class SearchActivity extends AppCompatActivity {
                 } else {
                     mList.remove("Travel");
                 }
-            }
-        });
-    }
-
-    public void updateDate() {
-        beginDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                beginDatePicker = new DatePickerDialog(getApplicationContext(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        Calendar newDate = Calendar.getInstance();
-                        newDate.set(year, month, dayOfMonth);
-                        beginDate.setText(dateFormat.format(newDate.getTime()));
-                    }
-                }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
-                beginDatePicker.show();
-            }
-        });
-
-        endDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                endDatePicker = new DatePickerDialog(getApplicationContext(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        Calendar newDate = Calendar.getInstance();
-                        newDate.set(year, month, dayOfMonth);
-                        endDate.setText(dateFormat.format(newDate.getTime()));
-                    }
-                }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
-                endDatePicker.show();
             }
         });
     }

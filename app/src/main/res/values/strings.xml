@@ -4,6 +4,7 @@
     <string name="searchButton">SEARCH</string>
     <string name="beginDate">Begin Date</string>
     <string name="endDate">End Date</string>
+    <string name="dateHint">dd/mm/yyyy</string>
 
     <!-- Used in Toolbar -->
     <string name="search">Search</string>
@@ -28,5 +29,17 @@
 
     <string name="notification_editText_hint">Search query term</string>
     <string name="notification_textView">Enable notifications (once per day)</string>
+
+    <!-- Used in About and Help Layouts -->
+    <string name="line1">Application réalisée par</string>
+    <string name="line2">Marc FLEURY</string>
+    <string name="line3">Dans le cadre de la formation</string>
+    <string name="line4">Développeur Android — OpenClassrooms</string>
+    <string name="line5">Lire la documentation :</string>
+    <string name="line6">goo.gl/byDfa7</string>
+    <string name="line7">Accéder au dossier du projet :</string>
+    <string name="line8">github.com/f-marc/MyNews</string>
+    <string name="line9">Prendre contact :</string>
+    <string name="line10">marc-fleury@outlook.fr</string>
 
 </resources>

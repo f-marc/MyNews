@@ -148,10 +148,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(notificationActivity);
                 return true;
             case R.id.activity_main_menu_help:
-                Toast.makeText(this, "Bouton 'help'", Toast.LENGTH_LONG).show();
+                Intent helpActivity = new Intent(MainActivity.this, HelpActivity.class);
+                startActivity(helpActivity);
                 return true;
             case R.id.activity_main_menu_about:
-                Toast.makeText(this, "Bouton 'about'", Toast.LENGTH_LONG).show();
+                Intent aboutActivity = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(aboutActivity);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

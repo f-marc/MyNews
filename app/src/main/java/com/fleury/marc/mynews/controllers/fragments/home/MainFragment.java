@@ -17,7 +17,7 @@ import com.fleury.marc.mynews.models.popular.PopularResponse;
 import com.fleury.marc.mynews.models.popular.PopularResult;
 import com.fleury.marc.mynews.utils.ItemClickSupport;
 import com.fleury.marc.mynews.utils.NYTimesStreams;
-import com.fleury.marc.mynews.views.PopularAdapter;
+import com.fleury.marc.mynews.adapters.PopularAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
