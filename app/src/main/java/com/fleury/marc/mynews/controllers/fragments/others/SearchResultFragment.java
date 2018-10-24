@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,12 @@ import butterknife.ButterKnife;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
-public class ResultFragment extends Fragment {
+import static com.fleury.marc.mynews.controllers.activities.SearchResultActivity.KEY_BEGIN_DATE_TWO;
+import static com.fleury.marc.mynews.controllers.activities.SearchResultActivity.KEY_CATEGORY_LIST_TWO;
+import static com.fleury.marc.mynews.controllers.activities.SearchResultActivity.KEY_END_DATE_TWO;
+import static com.fleury.marc.mynews.controllers.activities.SearchResultActivity.KEY_KEYWORD_TWO;
+
+public class SearchResultFragment extends Fragment {
 
     @BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView;
     @BindView(R.id.fragment_main_swipe_container) SwipeRefreshLayout swipeRefreshLayout;
@@ -35,19 +41,36 @@ public class ResultFragment extends Fragment {
     private Disposable disposable;
     private List<Doc> docs;
     private SearchAdapter adapter;
-    String section = "Arts"; // ---------- TEMPORAIRE -----------
 
     public final static String key = "061416d2a6f642c9b295500c8eadd4e3";
     public final static String KEY_URL = "KEY_URL";
 
-    public static ResultFragment newInstance() {
-        return new ResultFragment();
+    String mKeyCategory;
+    String mKeyKeyword;
+    String mKeyBeginDate;
+    String mKeyEndDate;
+
+    public static SearchResultFragment newInstance() {
+        return new SearchResultFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view);
+
+        Bundle bundle = getArguments();
+        mKeyCategory = bundle.getString(KEY_CATEGORY_LIST_TWO);
+        mKeyKeyword = bundle.getString(KEY_KEYWORD_TWO);
+
+        if(bundle.getString(KEY_BEGIN_DATE_TWO) != null) {
+            mKeyBeginDate = bundle.getString(KEY_BEGIN_DATE_TWO);
+        }
+
+        if(bundle.getString(KEY_END_DATE_TWO) != null) {
+            mKeyEndDate = bundle.getString(KEY_END_DATE_TWO);
+        }
+
         this.configureRecyclerView(); // Call during UI creation
         this.configureSwipeRefreshLayout(); // Configure the SwipeRefreshLayout
         this.executeHttpRequestWithRetrofit(); // Execute stream after UI creation
@@ -112,7 +135,7 @@ public class ResultFragment extends Fragment {
     // -------------------
 
     private void executeHttpRequestWithRetrofit(){
-        this.disposable = NYTimesStreams.streamFetchArticleSearch(section, key).subscribeWith(new DisposableObserver<SearchResponse>() {
+        this.disposable = NYTimesStreams.streamFetchArticleSearch(key, mKeyKeyword, mKeyCategory, mKeyBeginDate, mKeyEndDate).subscribeWith(new DisposableObserver<SearchResponse>() {
             @Override
             public void onNext(SearchResponse response) {
                 // Update RecyclerView after getting results from API

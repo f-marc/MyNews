@@ -40,8 +40,9 @@ public class NYTimesViewHolder extends RecyclerView.ViewHolder {
             List<Medium> mediums = (List<Medium>) result.getMedia();
             glide.load(mediums.get(0).getMediaMetadata().get(0).getUrl()).into(imageView);
         }*/
-        glide.load(result.getMedia().get(0).getMediaMetadata().get(0).getUrl()).into(imageView);
-
+        if(result.getMedia().get(0).getMediaMetadata() != null && result.getMedia().get(0).getMediaMetadata().size() > 0) {
+            glide.load(result.getMedia().get(0).getMediaMetadata().get(0).getUrl()).into(imageView);
+        }
     }
 
     public void updateWithStories(StoriesResult result, RequestManager glide){
@@ -51,14 +52,20 @@ public class NYTimesViewHolder extends RecyclerView.ViewHolder {
         String mDate = result.getPublishedDate();
         String subDate = mDate.substring(0, mDate.indexOf("T"));
         this.textViewDate.setText(subDate.replace("-", "/"));
-        //glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
+        if(result.getMultimedia() != null && result.getMultimedia().size() > 0) {
+            glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
+        }
     }
 
     public void updateWithSearch(Doc result, RequestManager glide){
         // Update TextView & ImageView
         this.textView.setText(result.getHeadline().getMain());
         //this.textViewCategory.setText(result.getSection());
-        this.textViewDate.setText(result.getPubDate());
-        //glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
+        String mDate = result.getPubDate();
+        String subDate = mDate.substring(0, mDate.indexOf("T"));
+        this.textViewDate.setText(subDate.replace("-", "/"));
+        if(result.getMultimedia() != null && result.getMultimedia().size() > 0) {
+            glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
+        }
     }
 }

@@ -64,6 +64,7 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".controllers.activities.NotificationResultActivity"></activity>
     </application>
 
 </manifest>

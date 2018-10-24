@@ -29,7 +29,7 @@ public interface NYTimesService {
     Observable<PopularResponse> getSection(@Path("section") String section, @Query("api-key") String key);
 
     @GET("search/v2/articlesearch.json")
-    Observable<SearchResponse> getSearch(@Query("news_desk") String section, @Query("api-key") String key);
+    Observable<SearchResponse> getSearch(@Query("api-key") String key, @Query("q") String keyword, @Query("fq") String section, @Query("begin_date") String beginDate, @Query("end_date") String endDate);
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")

@@ -1,44 +1,24 @@
 package com.fleury.marc.mynews.controllers.activities;
 
-import android.app.AlarmManager;
-import android.app.DatePickerDialog;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fleury.marc.mynews.R;
-import com.fleury.marc.mynews.controllers.fragments.others.CategoryFragment;
-import com.fleury.marc.mynews.controllers.fragments.others.ResultFragment;
-import com.fleury.marc.mynews.utils.AlarmReceiver;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,32 +41,47 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.endDate) EditText endDate;
 
     private ArrayList<String> mList = new ArrayList<>();
+    private String sBegin;
+    private String sEnd;
+    private String sListFinal;
 
     public final static String KEY_CATEGORY_LIST = "KEY_CATEGORY_LIST";
     public final static String KEY_KEYWORD = "KEY_KEYWORD";
+    public final static String KEY_BEGIN_DATE = "KEY_BEGIN_DATE";
+    public final static String KEY_END_DATE = "KEY_END_DATE";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
-
-        /*String test = "22/08/1966";
-        SimpleDateFormat formatEditText = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        Date d1 = formatEditText.parse(test);
-        SimpleDateFormat formatAPI = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-        String sCertDate = formatAPI.format(d1);*/
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!mList.isEmpty() && !mEditText.getText().toString().matches("")){
-                    String mListString = TextUtils.join(", ", mList);
-                    Log.i("List", mListString);
-                    Log.i("Keyword", mEditText.getText().toString());
                     Intent searchResultActivityIntent = new Intent(SearchActivity.this, SearchResultActivity.class);
-                    searchResultActivityIntent.putExtra(KEY_CATEGORY_LIST, mListString);
+
+                    updateList();
+                    searchResultActivityIntent.putExtra(KEY_CATEGORY_LIST, sListFinal);
                     searchResultActivityIntent.putExtra(KEY_KEYWORD, mEditText.getText().toString());
+
+                    if(!beginDate.getText().toString().matches("") && endDate.getText().toString().matches("")){
+                        // if only beginDate is completed
+                        updateBeginDate();
+                        searchResultActivityIntent.putExtra(KEY_BEGIN_DATE, sBegin);
+                    } else if (beginDate.getText().toString().matches("") && !endDate.getText().toString().matches("")) {
+                        // if only endDate is completed
+                        updateEndDate();
+                        searchResultActivityIntent.putExtra(KEY_END_DATE, sEnd);
+                    } else if (!beginDate.getText().toString().matches("") && !endDate.getText().toString().matches("")) {
+                        // if beginDate and endDate are both completed
+                        updateBeginDate();
+                        updateEndDate();
+                        searchResultActivityIntent.putExtra(KEY_BEGIN_DATE, sBegin);
+                        searchResultActivityIntent.putExtra(KEY_END_DATE, sEnd);
+                    }
+
                     startActivity(searchResultActivityIntent);
 
                 } else {
@@ -113,9 +108,9 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.add("Arts");
+                    mList.add("\"Arts\"");
                 } else {
-                    mList.remove("Arts");
+                    mList.remove("\"Arts\"");
                 }
             }
         });
@@ -124,9 +119,9 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.add("Books");
+                    mList.add("\"Books\"");
                 } else {
-                    mList.remove("Books");
+                    mList.remove("\"Books\"");
                 }
             }
         });
@@ -135,9 +130,9 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.add("Business Day");
+                    mList.add("\"Business Day\"");
                 } else {
-                    mList.remove("Business Day");
+                    mList.remove("\"Business Day\"");
                 }
             }
         });
@@ -146,9 +141,9 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.add("Politics");
+                    mList.add("\"Politics\"");
                 } else {
-                    mList.remove("Politics");
+                    mList.remove("\"Politics\"");
                 }
             }
         });
@@ -157,9 +152,9 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.add("Science");
+                    mList.add("\"Science\"");
                 } else {
-                    mList.remove("Science");
+                    mList.remove("\"Science\"");
                 }
             }
         });
@@ -168,9 +163,9 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.add("Sports");
+                    mList.add("\"Sports\"");
                 } else {
-                    mList.remove("Sports");
+                    mList.remove("\"Sports\"");
                 }
             }
         });
@@ -179,9 +174,9 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.add("Technology");
+                    mList.add("\"Technology\"");
                 } else {
-                    mList.remove("Technology");
+                    mList.remove("\"Technology\"");
                 }
             }
         });
@@ -190,12 +185,44 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mList.add("Travel");
+                    mList.add("\"Travel\"");
                 } else {
-                    mList.remove("Travel");
+                    mList.remove("\"Travel\"");
                 }
             }
         });
+    }
+
+    public void updateList(){
+        String sList = TextUtils.join(", ", mList).replace(", ", " ");
+        sListFinal = "news_desk:("+sList+")";
+        Log.i("Keyword", mEditText.getText().toString());
+    }
+
+    public void updateBeginDate(){
+        sBegin = beginDate.getText().toString();
+        SimpleDateFormat formatEditText = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        Date dBegin;
+        try {
+            dBegin = formatEditText.parse(sBegin);
+            SimpleDateFormat formatAPI = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+            sBegin = formatAPI.format(dBegin);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateEndDate() {
+        sEnd = endDate.getText().toString();
+        SimpleDateFormat formatEditText = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        Date dEnd;
+        try {
+            dEnd = formatEditText.parse(sEnd);
+            SimpleDateFormat formatAPI = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+            sEnd = formatAPI.format(dEnd);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
 }
