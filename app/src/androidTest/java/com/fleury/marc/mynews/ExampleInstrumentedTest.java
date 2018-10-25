@@ -17,7 +17,8 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
 
     /*@Test
-    public boolean internetAccess() {
+    public boolean internetAccess() throws Exception {
+
         ConnectivityManager connectivityManager = (ConnectivityManager) MainActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         if (networkInfo != null) {
@@ -29,4 +30,5 @@ public class ExampleInstrumentedTest {
     }*/
 
 }
+
 

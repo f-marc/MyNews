@@ -143,7 +143,8 @@ public class SearchResultFragment extends Fragment {
             }
 
             @Override
-            public void onError(Throwable e) { }
+            public void onError(Throwable e) {
+            }
 
             @Override
             public void onComplete() { }

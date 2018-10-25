@@ -47,6 +47,11 @@
             android:name=".controllers.activities.SearchResultActivity"
             android:parentActivityName=".controllers.activities.SearchActivity" />
 
+        <!-- NotificationResultActivity -->
+        <activity
+            android:name=".controllers.activities.NotificationResultActivity"
+            android:parentActivityName=".controllers.activities.MainActivity" />
+
         <!-- HelpActivity -->
         <activity
             android:name=".controllers.activities.HelpActivity"
@@ -64,7 +69,6 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".controllers.activities.NotificationResultActivity"></activity>
     </application>
 
 </manifest>

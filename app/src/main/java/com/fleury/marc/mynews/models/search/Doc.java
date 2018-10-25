@@ -51,9 +51,6 @@ public class Doc {
     @SerializedName("word_count")
     @Expose
     private Integer wordCount;
-    @SerializedName("score")
-    @Expose
-    private Integer score;
 
     public String getWebUrl() {
         return webUrl;
@@ -173,14 +170,6 @@ public class Doc {
 
     public void setWordCount(Integer wordCount) {
         this.wordCount = wordCount;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
     }
 
 }
