@@ -68,18 +68,14 @@ public class SearchActivity extends AppCompatActivity {
 
                     if(!beginDate.getText().toString().matches("") && endDate.getText().toString().matches("")){
                         // if only beginDate is completed
-                        updateBeginDate();
-                        searchResultActivityIntent.putExtra(KEY_BEGIN_DATE, sBegin);
+                        searchResultActivityIntent.putExtra(KEY_BEGIN_DATE, updateBeginDate(beginDate.getText().toString()));
                     } else if (beginDate.getText().toString().matches("") && !endDate.getText().toString().matches("")) {
                         // if only endDate is completed
-                        updateEndDate();
-                        searchResultActivityIntent.putExtra(KEY_END_DATE, sEnd);
+                        searchResultActivityIntent.putExtra(KEY_END_DATE, updateEndDate(endDate.getText().toString()));
                     } else if (!beginDate.getText().toString().matches("") && !endDate.getText().toString().matches("")) {
                         // if beginDate and endDate are both completed
-                        updateBeginDate();
-                        updateEndDate();
-                        searchResultActivityIntent.putExtra(KEY_BEGIN_DATE, sBegin);
-                        searchResultActivityIntent.putExtra(KEY_END_DATE, sEnd);
+                        searchResultActivityIntent.putExtra(KEY_BEGIN_DATE, updateBeginDate(beginDate.getText().toString()));
+                        searchResultActivityIntent.putExtra(KEY_END_DATE, updateEndDate(endDate.getText().toString()));
                     }
 
                     startActivity(searchResultActivityIntent);
@@ -196,11 +192,10 @@ public class SearchActivity extends AppCompatActivity {
     public void updateList(){
         String sList = TextUtils.join(", ", mList).replace(", ", " ");
         sListFinal = "news_desk:("+sList+")";
-        Log.i("Keyword", mEditText.getText().toString());
+        Log.i("Category", mEditText.getText().toString());
     }
 
-    public void updateBeginDate(){
-        sBegin = beginDate.getText().toString();
+    public String updateBeginDate(String sBegin){
         SimpleDateFormat formatEditText = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         Date dBegin;
         try {
@@ -210,10 +205,10 @@ public class SearchActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        return sBegin;
     }
 
-    public void updateEndDate() {
-        sEnd = endDate.getText().toString();
+    public String updateEndDate(String sEnd) {
         SimpleDateFormat formatEditText = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         Date dEnd;
         try {
@@ -223,6 +218,7 @@ public class SearchActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        return sEnd;
     }
 
 }

@@ -35,12 +35,7 @@ public class NYTimesViewHolder extends RecyclerView.ViewHolder {
         this.textView.setText(result.getTitle());
         this.textViewCategory.setText(result.getSection());
         this.textViewDate.setText(result.getPublishedDate().replace("-", "/"));
-        /*if(result.getMedia() instanceof String) {
-        } else {
-            List<Medium> mediums = (List<Medium>) result.getMedia();
-            glide.load(mediums.get(0).getMediaMetadata().get(0).getUrl()).into(imageView);
-        }*/
-        if(result.getMedia().get(0).getMediaMetadata() != null && result.getMedia().get(0).getMediaMetadata().size() > 0) {
+        if (listTest(result.getMedia().get(0).getMediaMetadata())){
             glide.load(result.getMedia().get(0).getMediaMetadata().get(0).getUrl()).into(imageView);
         }
     }
@@ -52,7 +47,7 @@ public class NYTimesViewHolder extends RecyclerView.ViewHolder {
         String mDate = result.getPublishedDate();
         String subDate = mDate.substring(0, mDate.indexOf("T"));
         this.textViewDate.setText(subDate.replace("-", "/"));
-        if(result.getMultimedia() != null && result.getMultimedia().size() > 0) {
+        if(listTest(result.getMultimedia())){
             glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
         }
     }
@@ -64,8 +59,13 @@ public class NYTimesViewHolder extends RecyclerView.ViewHolder {
         String mDate = result.getPubDate();
         String subDate = mDate.substring(0, mDate.indexOf("T"));
         this.textViewDate.setText(subDate.replace("-", "/"));
-        if(result.getMultimedia() != null && result.getMultimedia().size() > 0) {
+        if (listTest(result.getMultimedia())){
             glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
         }
     }
+
+    public static Boolean listTest(List list){
+        return (list != null && list.size() > 0);
+    }
+
 }
