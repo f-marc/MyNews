@@ -36,13 +36,13 @@ android:
     - chmod +x gradlew
 
   before_cache:
-    - rm -f  C:/Users/marc-/Documents/Android/MyNews/.gradle/caches/modules-2/modules-2.lock
-    - rm -fr C:/Users/marc-/Documents/Android/MyNews/.gradle/caches/*/plugin-resolution/
+    - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+    - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
   cache:
   directories:
-    - C:/Users/marc-/Documents/Android/MyNews/.gradle/caches/
-    - C:/Users/marc-/Documents/Android/MyNews/.gradle/wrapper/
-    - C:/Users/marc-/Documents/Android/MyNews/.android/build-cache
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
     
   script: ./gradlew connectedAndroidTest
