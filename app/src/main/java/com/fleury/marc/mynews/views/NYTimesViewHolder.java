@@ -55,12 +55,13 @@ public class NYTimesViewHolder extends RecyclerView.ViewHolder {
     public void updateWithSearch(Doc result, RequestManager glide){
         // Update TextView & ImageView
         this.textView.setText(result.getHeadline().getMain());
-        //this.textViewCategory.setText(result.getSection());
+        this.textViewCategory.setText(result.getSectionName());
         String mDate = result.getPubDate();
         String subDate = mDate.substring(0, mDate.indexOf("T"));
         this.textViewDate.setText(subDate.replace("-", "/"));
         if (listTest(result.getMultimedia())){
-            glide.load(result.getMultimedia().get(0).getUrl()).into(imageView);
+            String url = result.getMultimedia().get(0).getUrl();
+            glide.load("https://static01.nyt.com/" + url).into(imageView);
         }
     }
 

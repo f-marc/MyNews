@@ -13,9 +13,9 @@ import io.reactivex.schedulers.Schedulers;
 
 public class NYTimesStreams {
 
+    private static NYTimesService nyTimesService = NYTimesService.retrofit.create(NYTimesService.class);
 
     public static Observable<StoriesResponse> streamFetchArticleStories(String key){
-        NYTimesService nyTimesService = NYTimesService.retrofit.create(NYTimesService.class);
         return nyTimesService.getStories(key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -23,7 +23,6 @@ public class NYTimesStreams {
     }
 
     public static Observable<PopularResponse> streamFetchArticlePopular(String key){
-        NYTimesService nyTimesService = NYTimesService.retrofit.create(NYTimesService.class);
         return nyTimesService.getPopular(key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -31,7 +30,6 @@ public class NYTimesStreams {
     }
 
     public static Observable<PopularResponse> streamFetchArticleWorld(String key){
-        NYTimesService nyTimesService = NYTimesService.retrofit.create(NYTimesService.class);
         return nyTimesService.getWorld(key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -39,7 +37,6 @@ public class NYTimesStreams {
     }
 
     public static Observable<PopularResponse> streamFetchArticleSection(String section, String key){
-        NYTimesService nyTimesService = NYTimesService.retrofit.create(NYTimesService.class);
         return nyTimesService.getSection(section, key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -47,7 +44,6 @@ public class NYTimesStreams {
     }
 
     public static Observable<SearchResponse> streamFetchArticleSearch(String key, String keyword, String section, String beginDate, String endDate){
-        NYTimesService nyTimesService = NYTimesService.retrofit.create(NYTimesService.class);
         return nyTimesService.getSearch(key, keyword, section, beginDate, endDate)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
