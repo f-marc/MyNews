@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ViewPager pager = findViewById(R.id.activity_main_viewpager);
         //Set Adapter PageAdapter and glue it together
         pager.setAdapter(new com.fleury.marc.mynews.adapters.PageAdapter(getSupportFragmentManager()));
-
         //Get TabLayout from layout
         TabLayout tabs = findViewById(R.id.activity_main_tabs);
         //Glue TabLayout and ViewPager together
