@@ -63,6 +63,9 @@ public class SearchResultFragment extends Fragment {
         mKeyCategory = bundle.getString(KEY_CATEGORY_LIST_TWO);
         mKeyKeyword = bundle.getString(KEY_KEYWORD_TWO);
 
+        Log.i("DateTest_beginFrag", "date"+bundle.getString(KEY_BEGIN_DATE_TWO));
+
+
         if(bundle.getString(KEY_BEGIN_DATE_TWO) != null) {
             mKeyBeginDate = bundle.getString(KEY_BEGIN_DATE_TWO);
         }

@@ -5,9 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.fleury.marc.mynews.R;
-import com.fleury.marc.mynews.controllers.fragments.others.SearchResultFragment;
+import com.fleury.marc.mynews.controllers.fragments.others.NotificationResultFragment;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class NotificationResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_result);
+        setContentView(R.layout.activity_result);
 
         mPreferences = this.getSharedPreferences("pref", MODE_PRIVATE);
 
@@ -44,29 +45,31 @@ public class NotificationResultActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+
     private void updateList(){
+
         if(mPreferences.getBoolean("checkArts", false)){
             mList.add("\"Arts\"");
         }
         if(mPreferences.getBoolean("checkBooks", false)){
             mList.add("\"Books\"");
         }
-        if(mPreferences.getBoolean("checkBooks", false)){
+        if(mPreferences.getBoolean("checkBusiness", false)){
             mList.add("\"Business Day\"");
         }
-        if(mPreferences.getBoolean("checkBooks", false)){
+        if(mPreferences.getBoolean("checkPolitics", false)){
             mList.add("\"Politics\"");
         }
-        if(mPreferences.getBoolean("checkBooks", false)){
+        if(mPreferences.getBoolean("checkScience", false)){
             mList.add("\"Science\"");
         }
-        if(mPreferences.getBoolean("checkBooks", false)){
+        if(mPreferences.getBoolean("checkSports", false)){
             mList.add("\"Sports\"");
         }
-        if(mPreferences.getBoolean("checkBooks", false)){
+        if(mPreferences.getBoolean("checkTechnology", false)){
             mList.add("\"Technology\"");
         }
-        if(mPreferences.getBoolean("checkBooks", false)){
+        if(mPreferences.getBoolean("checkTravel", false)){
             mList.add("\"Travel\"");
         }
 
@@ -77,12 +80,13 @@ public class NotificationResultActivity extends AppCompatActivity {
 
     private void runFragment() {
         // Transfer current bundle to the fragment
-        SearchResultFragment mFrag = new SearchResultFragment();
+        NotificationResultFragment mFrag = new NotificationResultFragment();
         Bundle bundle = new Bundle();
         bundle.putString(KEY_CATEGORY_LIST_THREE, mKeyCategory);
         bundle.putString(KEY_KEYWORD_THREE, mKeyKeyword);
+
         // Display the fragment on FrameLayout
         mFrag.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_search_result_frame_layout, mFrag).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_result_frame_layout, mFrag).commit();
     }
 }

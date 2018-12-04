@@ -11,7 +11,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
 import com.fleury.marc.mynews.R;
-import com.fleury.marc.mynews.controllers.activities.MainActivity;
+import com.fleury.marc.mynews.controllers.activities.NotificationResultActivity;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
@@ -41,7 +41,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentText("New articles are available!")
                 .setPriority(Notification.PRIORITY_DEFAULT);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, NotificationResultActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
         notificationBuilder.setContentIntent(contentIntent);
 
         notificationManager.notify(1, notificationBuilder.build());

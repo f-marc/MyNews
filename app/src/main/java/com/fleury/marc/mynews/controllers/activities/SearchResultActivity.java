@@ -30,7 +30,7 @@ public class SearchResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_result);
+        setContentView(R.layout.activity_result);
 
         Bundle mExtra = getIntent().getExtras();
         mKeyCategory = mExtra.getString(KEY_CATEGORY_LIST);
@@ -38,7 +38,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         if(mExtra.getString(KEY_BEGIN_DATE) != null) {
             mKeyBeginDate = mExtra.getString(KEY_BEGIN_DATE);
-            Log.i("DateTest_begin", mKeyBeginDate);
+            Log.i("DateTest_begin1", mKeyBeginDate);
         }
 
         if(mExtra.getString(KEY_END_DATE) != null) {
@@ -64,10 +64,10 @@ public class SearchResultActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString(KEY_CATEGORY_LIST_TWO, mKeyCategory);
         bundle.putString(KEY_KEYWORD_TWO, mKeyKeyword);
-        bundle.getString(KEY_BEGIN_DATE_TWO, mKeyBeginDate);
-        bundle.getString(KEY_END_DATE_TWO, mKeyEndDate);
-        // Display the fragment on FrameLayout
+        bundle.putString(KEY_BEGIN_DATE_TWO, mKeyBeginDate);
+        bundle.putString(KEY_END_DATE_TWO, mKeyEndDate);
+        // Display the fragment on
         mFrag.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_search_result_frame_layout, mFrag).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_result_frame_layout, mFrag).commit();
     }
 }
