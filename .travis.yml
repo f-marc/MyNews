@@ -12,6 +12,7 @@ cache:
    - $HOME/.gradle/wrapper/
 
 env:
+  - CODECOV_TOKEN="23c9c925-14e9-4ab2-b4a3-72caa7bf3808"
  global:
  - ANDROID_API=26
  - EMULATOR_API=26
