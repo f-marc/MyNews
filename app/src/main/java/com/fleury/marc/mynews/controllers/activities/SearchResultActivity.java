@@ -3,7 +3,6 @@ package com.fleury.marc.mynews.controllers.activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import com.fleury.marc.mynews.R;
 import com.fleury.marc.mynews.controllers.fragments.others.SearchResultFragment;
@@ -38,12 +37,10 @@ public class SearchResultActivity extends AppCompatActivity {
 
         if(mExtra.getString(KEY_BEGIN_DATE) != null) {
             mKeyBeginDate = mExtra.getString(KEY_BEGIN_DATE);
-            Log.i("DateTest_begin1", mKeyBeginDate);
         }
 
         if(mExtra.getString(KEY_END_DATE) != null) {
             mKeyEndDate = mExtra.getString(KEY_END_DATE);
-            Log.i("DateTest_end", mKeyEndDate);
         }
 
         configureToolbar();

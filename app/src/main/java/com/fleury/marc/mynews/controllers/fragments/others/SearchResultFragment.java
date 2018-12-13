@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,9 +61,6 @@ public class SearchResultFragment extends Fragment {
         Bundle bundle = getArguments();
         mKeyCategory = bundle.getString(KEY_CATEGORY_LIST_TWO);
         mKeyKeyword = bundle.getString(KEY_KEYWORD_TWO);
-
-        Log.i("DateTest_beginFrag", "date"+bundle.getString(KEY_BEGIN_DATE_TWO));
-
 
         if(bundle.getString(KEY_BEGIN_DATE_TWO) != null) {
             mKeyBeginDate = bundle.getString(KEY_BEGIN_DATE_TWO);

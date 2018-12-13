@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -192,7 +191,6 @@ public class SearchActivity extends AppCompatActivity {
     public void updateList(){
         String sList = TextUtils.join(", ", mList).replace(", ", " ");
         sListFinal = "news_desk:("+sList+")";
-        Log.i("Category", mEditText.getText().toString());
     }
 
     public String updateBeginDate(String sBegin){
